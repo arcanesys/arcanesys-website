@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Arcane Systems — Pitches</title>
-<meta http-equiv="refresh" content="0; url=./nixfleet/">
-<link rel="canonical" href="./nixfleet/">
+<title>NixFleet — Pitch</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
@@ -20,16 +18,74 @@
     min-height: 100vh;
     padding: 24px;
   }
-  .card { max-width: 520px; text-align: center; }
-  h1 { font-size: 2.2em; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px; }
-  p { font-size: 1em; color: #bfdbfe; }
-  a { color: #ffffff; text-decoration: underline; }
+  .card {
+    max-width: 520px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 3em;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+  .tagline {
+    font-size: 1.1em;
+    color: #bfdbfe;
+    margin-bottom: 40px;
+  }
+  .lang-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  .lang-btn {
+    display: inline-block;
+    padding: 16px 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05em;
+    letter-spacing: 0.02em;
+    transition: all 0.2s;
+    min-width: 180px;
+  }
+  .lang-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+  .lang-btn .flag {
+    font-size: 1.4em;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .footer {
+    font-size: 0.85em;
+    color: #94a3b8;
+    margin-top: 24px;
+  }
+  .footer a {
+    color: #bfdbfe;
+    text-decoration: none;
+  }
+  .footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
   <div class="card">
-    <h1>Arcane Systems</h1>
-    <p>Redirection vers <a href="./nixfleet/">NixFleet pitch</a>...</p>
+    <h1>NixFleet</h1>
+    <div class="tagline">Sovereign Infrastructure for Europe</div>
+    <div class="lang-row">
+      <a href="./nixfleet-pitch-fr.html" class="lang-btn"><span class="flag">🇫🇷</span>Français</a>
+      <a href="./nixfleet-pitch-en.html" class="lang-btn"><span class="flag">🇬🇧</span>English</a>
+    </div>
+    <div class="footer">
+      <a href="https://github.com/arcanesys">github.com/arcanesys</a> &middot; <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a>
+    </div>
   </div>
 </body>
 </html>
