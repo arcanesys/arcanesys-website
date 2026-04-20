@@ -1,0 +1,29 @@
+---
+import { t } from '../i18n/utils';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+
+const crises = [
+  { key: 'sovereignty', borderColor: 'border-l-indigo' },
+  { key: 'security', borderColor: 'border-l-amber' },
+  { key: 'reproducibility', borderColor: 'border-l-emerald' },
+  { key: 'compliance', borderColor: 'border-l-rose' },
+];
+---
+
+<div class="grid grid-cols-2 gap-4 my-6">
+  {crises.map((c) => (
+    <div class:list={['bg-paper-2 border border-paper-3 p-5 border-l-[3px]', c.borderColor]}>
+      <h3 class="font-display text-base font-bold text-ink mb-1">
+        {t(lang, `problem.${c.key}_title`)}
+      </h3>
+      <p class="text-[0.88em] text-muted leading-relaxed">
+        {t(lang, `problem.${c.key}_text`)}
+      </p>
+    </div>
+  ))}
+</div>
