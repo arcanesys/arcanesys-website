@@ -1,0 +1,53 @@
+---
+import { t } from '../i18n/utils';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<div id="architecture" class="mt-12 pt-10 border-t border-paper-3">
+  <div class="font-mono text-[10px] tracking-[4px] text-indigo uppercase mb-2">
+    {t(lang, 'architecture.label')}
+  </div>
+  <h2 class="font-display text-[2rem] font-black text-ink leading-tight tracking-tight mb-6">
+    {t(lang, 'architecture.title')}
+  </h2>
+
+  <div class="flex flex-col items-center my-6">
+    <div class="flex justify-center w-full max-w-prose">
+      <div class="w-[65%] bg-paper-2 border border-paper-3 p-3.5 text-center">
+        <div class="font-display font-bold text-[0.92em] text-ink">{t(lang, 'architecture.decl_title')}</div>
+        <div class="text-[0.78em] text-muted mt-0.5">{t(lang, 'architecture.decl_detail')}</div>
+      </div>
+    </div>
+
+    <div class="text-rule text-center text-[1.1em] py-1.5">▼</div>
+
+    <div class="flex gap-3.5 w-full max-w-prose justify-center">
+      <div class="flex-1 bg-paper-2 border border-paper-3 p-3.5 text-center">
+        <div class="font-display font-bold text-[0.92em] text-ink">{t(lang, 'architecture.cli_title')}</div>
+        <div class="text-[0.78em] text-muted mt-0.5">{t(lang, 'architecture.cli_detail')}</div>
+      </div>
+      <div class="flex-1 bg-indigo/[0.06] border border-indigo/20 p-3.5 text-center">
+        <div class="font-display font-bold text-[0.92em] text-indigo">{t(lang, 'architecture.cp_title')}</div>
+        <div class="text-[0.78em] text-muted mt-0.5">{t(lang, 'architecture.cp_detail')}</div>
+      </div>
+      <div class="flex-1 bg-paper-2 border border-paper-3 p-3.5 text-center">
+        <div class="font-display font-bold text-[0.92em] text-ink">{t(lang, 'architecture.agent_title')}</div>
+        <div class="text-[0.78em] text-muted mt-0.5">{t(lang, 'architecture.agent_detail')}</div>
+      </div>
+    </div>
+
+    <div class="text-rule text-center text-[1.1em] py-1.5">▼</div>
+
+    <div class="flex justify-center w-full max-w-prose">
+      <div class="flex-1 bg-emerald/5 border border-emerald/30 p-3.5 text-center">
+        <div class="font-display font-bold text-[0.92em] text-emerald">{t(lang, 'architecture.machines_title')}</div>
+        <div class="text-[0.78em] text-muted mt-0.5">{t(lang, 'architecture.machines_detail')}</div>
+      </div>
+    </div>
+  </div>
+</div>
