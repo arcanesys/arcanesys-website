@@ -25,46 +25,6 @@
     "license_value": "MIT",
     "license_label": "Licence core"
   },
-  "problem": {
-    "label": "Le problème",
-    "title": "Quatre crises convergent",
-    "sovereignty_title": "Souveraineté",
-    "sovereignty_text": "Jamf, Intune, AWX, AWS SSM font de votre infrastructure une dépendance d'un cloud US. Exposition au Cloud Act. Votre capacité à déployer dépend de leur disponibilité.",
-    "security_title": "Sécurité",
-    "security_text": "Les outils traditionnels empilent des couches (antivirus, EDR, SIEM) qui observent sans jamais changer les propriétés du système. Dérive, persistance, binaires non vérifiés.",
-    "reproducibility_title": "Reproductibilité",
-    "reproducibility_text": "Ansible, Puppet décrivent des actions à effectuer, pas des états à atteindre. Le résultat dépend de l'état préexistant. La dérive de configuration est structurellement inévitable.",
-    "compliance_title": "Conformité",
-    "compliance_text": "NIS2, DORA, ISO 27001, ANSSI BP-028 : traçabilité, reprise rapide, sécurité de la chaîne d'approvisionnement. Amendes jusqu'à 10M d'euros. Responsabilité personnelle des dirigeants.",
-    "callout": "Le fossé d'audit : les outils standards gèrent l'état souhaité mais ne peuvent pas prouver l'état réel. Vérifier qu'un système correspond à sa politique nécessite un outil d'audit séparé, un agent séparé, et la confiance dans l'environnement d'exécution. NixFleet comble ce fossé structurellement."
-  },
-  "solution": {
-    "label": "La solution",
-    "title": "Conformité par construction",
-    "intro": "NixFleet transforme les garanties mathématiques de NixOS en une plateforme de gestion de flotte entreprise. Pas la conformité comme ajout. La conformité comme conséquence de l'architecture.",
-    "nix_title": "Framework Nix",
-    "nix_text": "Une seule API mkHost pour déclarer une flotte entière. NixOS standard, pas de DSL propriétaire. Si vous partez, votre configuration fonctionne sans nous.",
-    "cp_title": "Control Plane Rust",
-    "cp_text": "État de la flotte, orchestration des déploiements (canary, progressif, global), journal d'audit complet. Authentification mTLS + clés API.",
-    "agent_title": "Agent autonome",
-    "agent_text": "Modèle pull sur chaque hôte. Machine à états avec health checks et rollback automatique en cas d'échec. Fonctionne même si le control plane est temporairement indisponible.",
-    "compliance_title": "Moteur de conformité",
-    "compliance_text": "16 modules de contrôle, pattern enforce + prove. Collecte automatique de preuves. Fonctionne avec ou sans le reste de NixFleet."
-  },
-  "architecture": {
-    "label": "Architecture",
-    "title": "Trois couches, une garantie",
-    "decl_title": "Couche déclarative",
-    "decl_detail": "flake.nix · mkHost par machine · flake.lock (SHA-256)",
-    "cli_title": "CLI Rust",
-    "cli_detail": "Interface opérateur",
-    "cp_title": "Control Plane",
-    "cp_detail": "Axum · SQLite · Rollouts · Audit",
-    "agent_title": "Agent ×N",
-    "agent_detail": "Polling · Health · Rollback",
-    "machines_title": "Machines NixOS",
-    "machines_detail": "web-01 · db-01 · edge-01 · ..."
-  },
   "cta": {
     "title": "Commencez par un pilote gratuit",
     "subtitle": "Déployez NixFleet sur 5 à 10 machines. Nous faisons l'audit et la mise en place. Vous obtenez une infrastructure conforme.",
