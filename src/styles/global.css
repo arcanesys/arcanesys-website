@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* ── Font faces ── */
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/fonts/fraunces-variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora-variable.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora-italic-variable.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono-variable.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #18130c;
+  background: #faf8f5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Grain overlay ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
