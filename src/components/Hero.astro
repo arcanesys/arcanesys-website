@@ -1,0 +1,39 @@
+---
+import { t } from '../i18n/utils';
+import Nav from './Nav.astro';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<header class="bg-dark text-paper relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 20%, rgba(55,48,163,0.10), transparent), radial-gradient(ellipse 35% 30% at 80% 70%, rgba(6,95,70,0.05), transparent);"></div>
+
+  <Nav lang={lang} />
+
+  <div class="relative max-w-hero mx-auto px-10 pt-15 pb-14 text-center">
+    <div class="font-mono text-[10px] tracking-[5px] text-paper/20 uppercase mb-5">
+      {t(lang, 'hero.eyebrow')}
+    </div>
+
+    <h1 class="font-display text-[clamp(2.2rem,5vw,3.4rem)] font-black leading-[1.05] tracking-tight text-paper">
+      {t(lang, 'hero.headline1')}<br />{t(lang, 'hero.headline2')}
+    </h1>
+
+    <p class="font-body italic text-[1.05rem] text-paper/35 mt-[18px] max-w-[520px] mx-auto leading-relaxed">
+      {t(lang, 'hero.subtitle')}
+    </p>
+
+    <div class="mt-8 flex gap-3.5 justify-center">
+      <a href="mailto:contact@arcanesys.fr" class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded bg-indigo text-paper hover:bg-indigo-hover hover:-translate-y-px transition-all">
+        {t(lang, 'hero.cta_primary')}
+      </a>
+      <a href={`/${lang}/#architecture`} class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded border border-paper/[0.18] text-paper/50 hover:border-paper/35 hover:text-paper/70 transition-all">
+        {t(lang, 'hero.cta_secondary')} →
+      </a>
+    </div>
+  </div>
+</header>
