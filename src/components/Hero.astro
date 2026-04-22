@@ -15,7 +15,7 @@ const { lang } = Astro.props;
   <Nav lang={lang} />
 
   <div class="relative max-w-hero mx-auto px-10 pt-15 pb-14 text-center">
-    <div class="font-mono text-[10px] tracking-[5px] text-paper/20 uppercase mb-5">
+    <div class="font-mono text-[10px] tracking-[5px] text-paper/40 uppercase mb-5">
       {t(lang, 'hero.eyebrow')}
     </div>
 
@@ -23,7 +23,7 @@ const { lang } = Astro.props;
       {t(lang, 'hero.headline1')}<br />{t(lang, 'hero.headline2')}
     </h1>
 
-    <p class="font-body italic text-[1.05rem] text-paper/35 mt-[18px] max-w-[520px] mx-auto leading-relaxed">
+    <p class="font-body italic text-[1.05rem] text-paper/55 mt-[18px] max-w-[520px] mx-auto leading-relaxed">
       {t(lang, 'hero.subtitle')}
     </p>
 
@@ -31,7 +31,7 @@ const { lang } = Astro.props;
       <a href="mailto:contact@arcanesys.fr" class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded bg-indigo text-paper hover:bg-indigo-hover hover:-translate-y-px transition-all">
         {t(lang, 'hero.cta_primary')}
       </a>
-      <a href={`/${lang}/#architecture`} class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded border border-paper/[0.18] text-paper/50 hover:border-paper/35 hover:text-paper/70 transition-all">
+      <a href={`/${lang}/#architecture`} class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded border border-paper/[0.30] text-paper/70 hover:border-paper/50 hover:text-paper/90 transition-all">
         {t(lang, 'hero.cta_secondary')} →
       </a>
     </div>
