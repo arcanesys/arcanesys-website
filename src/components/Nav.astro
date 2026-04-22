@@ -19,12 +19,12 @@ const a = anchors[lang] ?? anchors.en;
   <div class="font-mono text-[13px] tracking-[3px] text-paper/70">
     ARCANE<span class="text-indigo">SYS</span>
   </div>
-  <div class="flex gap-7 items-center font-body text-sm text-paper/35">
-    <a href={`/${lang}/#${a.solution}`} class="hover:text-paper/70 transition-colors">{t(lang, 'nav.nixfleet')}</a>
-    <a href={`/${lang}/#${a.compliance}`} class="hover:text-paper/70 transition-colors">{t(lang, 'nav.compliance')}</a>
-    <a href={`/${lang}/#${a.architecture}`} class="hover:text-paper/70 transition-colors">{t(lang, 'nav.architecture')}</a>
-    <a href="https://github.com/arcanesys" target="_blank" rel="noopener" class="hover:text-paper/70 transition-colors">{t(lang, 'nav.github')} ↗</a>
-    <a href={`/${otherLang}/`} class="hover:text-paper/70 transition-colors uppercase font-mono text-[11px] tracking-[1px]">{otherLang.toUpperCase()}</a>
+  <div class="flex gap-7 items-center font-body text-sm text-paper/60">
+    <a href={`/${lang}/#${a.solution}`} class="hover:text-paper/90 transition-colors">{t(lang, 'nav.nixfleet')}</a>
+    <a href={`/${lang}/#${a.compliance}`} class="hover:text-paper/90 transition-colors">{t(lang, 'nav.compliance')}</a>
+    <a href={`/${lang}/#${a.architecture}`} class="hover:text-paper/90 transition-colors">{t(lang, 'nav.architecture')}</a>
+    <a href="https://github.com/arcanesys" target="_blank" rel="noopener" class="hover:text-paper/90 transition-colors">{t(lang, 'nav.github')} ↗</a>
+    <a href={`/${otherLang}/`} class="hover:text-paper/90 transition-colors uppercase font-mono text-[11px] tracking-[1px]">{otherLang.toUpperCase()}</a>
     <a href="mailto:contact@arcanesys.fr" class="text-paper bg-indigo px-4 py-1.5 rounded font-mono text-[11px] tracking-[1px] hover:bg-indigo-hover transition-colors">
       {t(lang, 'nav.contact')}
     </a>
