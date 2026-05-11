@@ -426,17 +426,17 @@
     <div>
       <div class="comp-card">
         <h3>Framework Nix</h3>
-        <p>API unique <code>mkHost</code> pour déclarer une flotte entière dans un seul <code>flake.nix</code>. 11 scopes s'activent automatiquement. Pas de DSL propriétaire — du NixOS standard.</p>
+        <p>API <code>mkHost</code> pour les hôtes, <code>mkFleet</code> pour la flotte typée. Contract impls <code>flake.scopes.*</code> qui s'activent automatiquement. Pas de DSL propriétaire, du NixOS standard.</p>
       </div>
       <div class="comp-card">
         <h3>Control Plane Rust</h3>
-        <p>Serveur central : état de la flotte, gestion des releases (manifestes immuables), orchestration des rollouts (canary, staged, all-at-once), journal d'audit complet. 23 endpoints REST. Authentification mTLS + API keys.</p>
+        <p>Routeur de cache sans secret. Polle <code>fleet.resolved.json</code> signé par CI, vérifie la signature contre la racine de confiance, sert les closures cibles aux agents en mTLS. Aucun endpoint de déploiement impératif. Compromettre le CP est une panne, pas une brèche.</p>
       </div>
     </div>
     <div>
       <div class="comp-card">
         <h3>Agent Rust</h3>
-        <p>Binaire autonome sur chaque machine. Modèle pull (polling). Machine à 7 états avec health checks et rollback automatique en cas d'échec. Fonctionne même si le CP est temporairement indisponible.</p>
+        <p>Binaire autonome sur chaque machine. Polling + vérification de signature + fenêtre de fraîcheur. Magic rollback&nbsp;: silence sur le deadline = retour automatique à la génération précédente. Fonctionne même si le CP est temporairement indisponible.</p>
       </div>
       <div class="comp-card">
         <h3>Compliance</h3>
@@ -455,11 +455,11 @@
       <tr><th>Composant</th><th>Statut</th><th>Détail</th></tr>
     </thead>
     <tbody>
-      <tr><td>Framework Nix (<code>mkHost</code>)</td><td class="check">Fonctionnel</td><td>API simplifiée, 11 scopes auto-activés, templates flake</td></tr>
-      <tr><td>Control plane Rust</td><td class="check">Fonctionnel</td><td>Axum, SQLite, HTTPS, mTLS, 23 endpoints, releases immuables, audit trail</td></tr>
-      <tr><td>Agent Rust</td><td class="check">Fonctionnel</td><td>Machine à 7 états, polling, health checks, rollback auto</td></tr>
-      <tr><td>CLI Rust</td><td class="check">Fonctionnel</td><td>init, bootstrap, deploy, rollback, status, release, rollout, machines, --json, -v</td></tr>
-      <tr><td>Sécurité</td><td class="check">Production-ready</td><td>mTLS agent-CP, API keys SHA-256 (RBAC), HTTPS obligatoire</td></tr>
+      <tr><td>Framework Nix (<code>mkHost</code> + <code>mkFleet</code>)</td><td class="check">Fonctionnel</td><td>Déclaration typée de flotte, contract impls, templates flake</td></tr>
+      <tr><td>Reconciler GitOps</td><td class="check">Fonctionnel</td><td>Polling <code>fleet.resolved.json</code> signé par CI, mTLS agent, pas d'endpoint deploy impératif</td></tr>
+      <tr><td>Agent Rust</td><td class="check">Fonctionnel</td><td>Vérification de signatures, fenêtre de fraîcheur, magic rollback (deadline-based)</td></tr>
+      <tr><td>Binaires opérateur</td><td class="check">Fonctionnel</td><td><code>nixfleet-derive-pubkey</code>, <code>nixfleet-mint-token</code>. Pas de CLI deploy : les changements sont des commits Git.</td></tr>
+      <tr><td>Sécurité</td><td class="check">Production-ready</td><td>Chaîne de signatures (racine d'org → CI → closures → sondes), mTLS, HTTPS obligatoire</td></tr>
       <tr><td>Compliance</td><td class="check">16 contrôles actifs</td><td>4 référentiels (NIS2, DORA, ISO 27001, ANSSI BP-028), evidence collector automatique</td></tr>
       <tr><td>Tests</td><td class="check">Complet</td><td>12 scénarios VM fleet, tests infra, eval Nix, intégration, unit Rust</td></tr>
       <tr><td>Documentation</td><td class="check">Complète</td><td>mdbook, getting started, architecture, référence API</td></tr>
@@ -489,17 +489,17 @@
     <!-- Layer 3: CP + CLI + Agents -->
     <div class="arch-layer arch-layer-3">
       <div class="arch-box-node">
-        <div class="arch-node-title">CLI Rust</div>
-        <div class="arch-node-detail">Opérateur</div>
-        <div class="arch-node-link">API keys &#8594;</div>
+        <div class="arch-node-title">Opérateur</div>
+        <div class="arch-node-detail">git push</div>
+        <div class="arch-node-link">commit signé &#8594;</div>
       </div>
       <div class="arch-box-node arch-highlight">
         <div class="arch-node-title">Control Plane</div>
-        <div class="arch-node-detail">Axum · SQLite · Releases · Rollouts · Audit</div>
+        <div class="arch-node-detail">Routeur de cache · vérifie signatures · sans secret</div>
       </div>
       <div class="arch-box-node">
         <div class="arch-node-title">Agent Rust &times;N</div>
-        <div class="arch-node-detail">Polling · Health check · Auto-rollback</div>
+        <div class="arch-node-detail">Vérifie · fenêtre de fraîcheur · magic rollback</div>
         <div class="arch-node-link">&#8592; mTLS</div>
       </div>
     </div>
@@ -526,7 +526,7 @@
   </div>
 
   <div class="callout callout-blue">
-    <strong>Sécurité&nbsp;:</strong> mTLS entre chaque agent et le control plane (certificat client par machine). API keys SHA-256 scopées (readonly/deploy/admin) pour les opérateurs. HTTPS obligatoire en production. Le Nix store est adressé par hash — un binaire modifié est physiquement impossible à substituer.
+    <strong>Sécurité&nbsp;:</strong> Chaîne de signatures de la racine d'organisation (hors-ligne) jusqu'aux sondes d'hôte. Le control plane ne détient aucun secret&nbsp;: compromis = panne, pas brèche. mTLS entre chaque agent et le CP (certificat client par machine). HTTPS obligatoire en production. Le Nix store est adressé par hash, un binaire modifié est physiquement impossible à substituer.
   </div>
 
 
@@ -540,8 +540,8 @@
       <tr><th>Obligation NIS2</th><th>Approche classique</th><th>NixFleet</th></tr>
     </thead>
     <tbody>
-      <tr><td>Traçabilité des modifications</td><td>SIEM + outils séparés (+30k&nbsp;&euro;/an)</td><td class="bold">Chaque changement = commit Git signé</td></tr>
-      <tr><td>Reprise après incident &lt;24h</td><td>Runbooks manuels, résultat incertain</td><td class="bold">Rollback atomique &lt; 90 secondes</td></tr>
+      <tr><td>Traçabilité des modifications</td><td>SIEM + outils séparés (+30k&nbsp;&euro;/an)</td><td class="bold">Chaque changement = commit Git signé, propagé via artefact signé par CI</td></tr>
+      <tr><td>Reprise après incident &lt;24h</td><td>Runbooks manuels, résultat incertain</td><td class="bold">Magic rollback&nbsp;: silence sur le deadline = retour automatique</td></tr>
       <tr><td>Sécurité chaîne d'approvisionnement</td><td>Outils SBOM séparés, intégration manuelle</td><td class="bold">SBOM auto depuis flake.lock</td></tr>
       <tr><td>Chiffrement (Art. 21h)</td><td>Config manuelle par système, incohérences</td><td class="bold">LUKS + mTLS + politique TLS, flotte entière</td></tr>
       <tr><td>Contrôle d'accès (Art. 21i)</td><td>IAM séparé, CMDB manuelle</td><td class="bold">SSH hardening + audit d'accès intégrés</td></tr>
@@ -671,14 +671,14 @@
     <tr>
       <td><span class="badge badge-blocked">Bloqué</span></td>
       <td>Phase 7</td>
-      <td>Enterprise : multi-tenant, RBAC, dashboard — en attente des retours pilotes</td>
+      <td>Enterprise : multi-organisation, RBAC d'observation, dashboard, HSM pour la racine de signature — en attente des retours pilotes</td>
     </tr>
   </table>
 
   <div class="grid-3" style="margin-top: 12px;">
-    <div class="metric"><span class="number">~35,7k</span><span class="label">Lignes de code (24,7k source + 11k tests)</span></div>
+    <div class="metric"><span class="number">v0.2</span><span class="label">Spine livrée (trust inversion)</span></div>
     <div class="metric"><span class="number">12</span><span class="label">Scénarios VM fleet</span></div>
-    <div class="metric"><span class="number">23</span><span class="label">Endpoints API</span></div>
+    <div class="metric"><span class="number">3</span><span class="label">Vérifications de signature par opération</span></div>
   </div>
 
 
@@ -692,13 +692,13 @@
       <tr><th>Capacité</th><th>NixOS seul (DIY)</th><th>Avec NixFleet</th></tr>
     </thead>
     <tbody>
-      <tr><td>Déploiement flotte</td><td>SSH manuel ou Colmena (push)</td><td class="bold">Agent autonome (pull), fonctionne à travers les firewalls</td></tr>
-      <tr><td>Rollout progressif</td><td>Aucun — tout ou rien</td><td class="bold">Canary, staged %, health-gated</td></tr>
-      <tr><td>Rollback</td><td>Manuel, machine par machine</td><td class="bold">Automatique sur échec health check, flotte entière &lt;90s</td></tr>
-      <tr><td>Visibilité flotte</td><td>Aucune vue centralisée</td><td class="bold">État de chaque machine en temps réel via le control plane</td></tr>
-      <tr><td>Sécurité</td><td>À configurer soi-même</td><td class="bold">mTLS + API keys + HTTPS intégrés, zéro config</td></tr>
-      <tr><td>Conformité</td><td>Effort manuel considérable</td><td class="bold">16 contrôles activables en 1 ligne (NIS2, DORA, ISO 27001, ANSSI), preuves automatiques</td></tr>
-      <tr><td>Audit trail</td><td>Inexistant</td><td class="bold">Journal complet avec identité acteur, export CSV/JSON</td></tr>
+      <tr><td>Déploiement flotte</td><td>SSH manuel ou Colmena (push)</td><td class="bold">GitOps signé&nbsp;: commit = intent, agent vérifie et applique</td></tr>
+      <tr><td>Rollout progressif</td><td>Aucun, tout ou rien</td><td class="bold">Canary + sondes runtime signées comme gate de promotion</td></tr>
+      <tr><td>Rollback</td><td>Manuel, machine par machine</td><td class="bold">Magic rollback&nbsp;: silence sur le deadline = retour automatique</td></tr>
+      <tr><td>Visibilité flotte</td><td>Aucune vue centralisée</td><td class="bold">Sondes signées agrégées par le control plane</td></tr>
+      <tr><td>Sécurité</td><td>À configurer soi-même</td><td class="bold">Chaîne de signatures racine&nbsp;→ CI → closures + sondes, mTLS intégrés</td></tr>
+      <tr><td>Conformité</td><td>Effort manuel considérable</td><td class="bold">Conformité comme release gate&nbsp;: contrôles statiques échouent le build, sondes runtime bloquent la promotion</td></tr>
+      <tr><td>Audit trail</td><td>Inexistant</td><td class="bold">Git log signé + evidence signée par hôte, sans SIEM séparé</td></tr>
       <tr><td>Support</td><td>Communauté (best-effort)</td><td class="bold">SLA, support dédié, expertise compliance</td></tr>
     </tbody>
   </table>
