@@ -1,0 +1,154 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en';
+const pathname = Astro.url.pathname;
+
+const properties = [
+  { property: 'Identified by a key that cannot leave the silicon', mech: 'TPM2-generated signing key, sealed against the host\'s declared PCR set. Exportable only as a public half.' },
+  { property: 'Authorised by a hardware-bound enrollment', mech: 'Bootstrap token claims include the host\'s TPM Endorsement Key (EK) fingerprint. CP refuses enrollment if the EK quote doesn\'t match.' },
+  { property: 'Trusted to speak only when boot state matches declaration', mech: 'Every probe signature simultaneously attests "kernel + initrd + cmdline at signing time matched the closure-derived expectation".' },
+  { property: 'Permitted to decrypt only when boot state matches declaration', mech: 'agenix secrets AND LUKS volume keys sealed against the same PCR policy. Tampered kernel = TPM authorization failure before plaintext is reachable.' },
+  { property: 'Auto-expelled if it lies persistently', mech: 'Host-attestation quarantine state machine. CP stops issuing fresh mTLS certs after N consecutive AttestationDrift/Invalid outcomes. Host falls out of active fleet within one renewal cycle (~30 days), observably and reversibly.' },
+];
+
+const rfcs = [
+  { id: '0004', title: 'Hardware-rooted trust', body: 'TPM-bound host signing key, PCR-bound secrets (agenix + LUKS sealed against boot-state policy), boot-evidence wire protocol additions, escrowed recovery flow.' },
+  { id: '0005', title: 'Trust lifecycle', body: 'EK-bound bootstrap tokens, three documented operator roles (release / org-root / infrastructure), threshold-signed channels (N-of-M hardware-token signers), host-attestation quarantine, tested rotation runbooks.' },
+  { id: '0006', title: 'Freshness window policy', body: 'Bounded staleness for channel artifacts (particularly relevant to air-gap).' },
+  { id: '0007', title: 'Air-gapped operation', body: 'Signed bundle transport, transport-only sovereign binary cache, verification-host workflow.' },
+];
+---
+
+<Layout title="Vision - Cryptographic citizenship of the fleet - Arcanesys" lang={lang} description="Cryptographic citizenship of the fleet. TPM-bound identity, PCR-sealed secrets, threshold-signed channels, host-attestation quarantine. Specified in 4 RFCs, foundation already shipping.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.vision.title"
+    subtitleKey="pageHeader.vision.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+
+    <blockquote>
+      <strong>RFC-0004 §1, verbatim:</strong> "A signed artifact from a host is also a proof that the host's measured boot state matched declared expectations at the moment of signing."
+    </blockquote>
+
+    <h2><span class="num">01</span>The thesis</h2>
+    <p>
+      The signed-artifact chain gives each fleet member a cryptographic identity in software
+      today. Hardware binding anchors that identity in the silicon, gates every secret on
+      boot-state attestation, and makes lying about identity a path to automatic expulsion
+      from the fleet. <strong>A stolen disk yields no readable filesystem, a tampered host
+      cannot speak in the evidence chain, and a host that lies persistently stops being part
+      of the fleet.</strong>
+    </p>
+
+    <h2><span class="num">02</span>Five properties of a cryptographic citizen</h2>
+    <table>
+      <thead><tr><th>Property</th><th>Mechanism</th></tr></thead>
+      <tbody>
+        {properties.map((p) => (
+          <tr>
+            <td><strong>{p.property}</strong></td>
+            <td>{p.mech}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2><span class="num">03</span>Four RFCs - design-stage, falsifiable criteria</h2>
+    <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+      {rfcs.map((r) => (
+        <div class="bg-paper-2 border border-paper-3 p-5 border-l-[3px] border-l-amber">
+          <div class="font-mono text-[10px] tracking-[2px] text-amber uppercase mb-1">RFC-{r.id}</div>
+          <div class="font-display text-base font-bold text-ink mb-2">{r.title}</div>
+          <p class="text-[0.88em] text-muted leading-relaxed">{r.body}</p>
+        </div>
+      ))}
+    </div>
+    <p>
+      Each RFC ships with a falsifiable done-criteria section. Total ~1000 lines across
+      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0004-hardware-rooted-trust.md">RFC-0004</a>,
+      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0005-trust-lifecycle.md">RFC-0005</a>,
+      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0006-freshness-window-policy.md">RFC-0006</a>,
+      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0007-air-gapped-operation.md">RFC-0007</a>.
+      This is not aspirational language - these are specifications waiting for implementation effort.
+    </p>
+
+    <h2><span class="num">04</span>What's already shipping toward this</h2>
+    <p>The trajectory is not greenfield. The foundation already ships:</p>
+    <ul>
+      <li><strong>TPM keyslot abstraction</strong> (<code>impls/keyslots/tpm/</code>): primary-key generation, persistent-handle eviction, <code>tpm-sign-&lt;name&gt;</code> wrappers, PCR policy support, idempotent across impermanence wipes. RFC-0004 explicitly does <em>not</em> reimplement this - it extends with host-identity binding.</li>
+      <li><strong>Signed-artifact verification machinery</strong>: the same <code>verify-artifact</code> library that today verifies CI release signatures will tomorrow verify TPM-quoted boot evidence on the same chain.</li>
+      <li><strong>Trust-root rotation slots</strong> (<code>current</code> / <code>previous</code> / <code>successor</code> / <code>retireAt</code>) on every declared trust root.</li>
+      <li><strong>Bootstrap-token allowlist</strong>: single-use enforcement, hostname + pubkey scoping. EK-fingerprint binding is an additive field.</li>
+    </ul>
+
+    <h2><span class="num">05</span>Why this matters for regulation</h2>
+    <p>
+      <strong>NIS2 Article 21(d) - supply-chain security.</strong> Asks how you know the
+      software running on your host is what you intended. The signed-artifact chain answers
+      with closure-hash + cryptographic signing today. Hardware binding extends to: the boot
+      chain that loaded the closure is also measured into every signature the host produces.
+    </p>
+    <p>
+      <strong>NIS2 Article 21(i) - access control + privileged access evidence.</strong> Asks
+      how you know who is in your fleet and that they have not been replaced. mTLS certs
+      signed by your fleet CA answer today. Hardware binding extends with: the host's
+      signing key cannot leave the TPM, enrollment is bound to the hardware EK recorded at
+      unboxing, and a host that lies about its boot state is automatically removed.
+    </p>
+    <p>
+      <strong>ANSSI BP-028 v2.0 (R7-R14, R33).</strong> Largely kernel + boot + audit
+      hardening. Today's chain ships the static gates. The trajectory ties them to a
+      hardware-attested measurement chain.
+    </p>
+    <p>
+      <strong>DORA Articles 9 + 17.</strong> Access + authentication, plus incident management.
+      Both benefit from the visible-failure, reversible-quarantine model: a misbehaving host
+      is not silently kept in the fleet, and its expulsion is auditable end-to-end.
+    </p>
+    <p>
+      <strong>SecNumCloud / ANSSI qualification trajectories</strong> require the kind of
+      hardware-bound trust chain the RFCs specify. This is the work that takes NixFleet from
+      "credible NIS2-aligned tooling" to "qualifiable for sovereign deployments."
+    </p>
+
+    <h2><span class="num">06</span>What this is NOT - honest scoping</h2>
+    <ul>
+      <li><strong>No calendar commitment.</strong> This work is design-stage. Pilot operators are direct input to the priorities. We ship when the spec is right, not when a deck promised.</li>
+      <li><strong>Not confidential computing.</strong> The trajectory does not defend against runtime tampering after a successful unsealed boot. That requires AMD SEV / Intel TDX - a separate future RFC.</li>
+      <li><strong>Not bus-level attacks.</strong> Sustained physical access with TPM-bus interception is out of scope (same future RFC).</li>
+      <li><strong>Not auto-magic.</strong> PCR drift from a legitimate firmware update requires the operator to test on staging, bump <code>firmwareGeneration</code> in <code>fleet.nix</code>, and let CI re-sign. The framework refuses silent acceptance of boot-chain changes - the cost is also the value.</li>
+      <li><strong>Per-host opt-in.</strong> No fleet-wide flag day. A host migrates to TPM-bound identity by declaring it in <code>fleet.nix</code>.</li>
+    </ul>
+
+    <h2><span class="num">07</span>For a pilot operator</h2>
+    <p>
+      A pilot signed in 2026 directly informs the trust trajectory. The pilot validates the
+      signed-artifact-chain model on your hardware and against your auditor's evidence
+      requirements. Future work prioritises the integrations your operators need - PCR set
+      defaults, EK capture tooling, recovery flow ergonomics, threshold-signing UX - the
+      right defaults emerge from real deployments, not greenfield design.
+    </p>
+    <p>
+      This is the trade pilot operators accept: a framework that ships today and iterates
+      with their feedback, in exchange for direct influence on the design that
+      determines what hardware-rooted trust looks like in EU regulated infrastructure
+      for the next decade.
+    </p>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/contact/?topic=vision`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        If your trajectory needs this in 18–36 months, talk to us now →
+      </a>
+    </p>
+  </article>
+
+  <CtaSection lang={lang} />
+  <Footer lang={lang} />
+</Layout>

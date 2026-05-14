@@ -1,0 +1,126 @@
+{
+  "nav": {
+    "brand": "ARCANESYS",
+    "product": "Product",
+    "compliance": "Compliance",
+    "vision": "Vision",
+    "pilot": "Pilot",
+    "demo": "Demo",
+    "about": "About",
+    "github": "GitHub",
+    "contact": "CONTACT"
+  },
+  "hero": {
+    "eyebrow": "NixFleet",
+    "headline1": "Signed GitOps fleet management",
+    "headline2": "for NixOS",
+    "subtitle": "Declarative, signed, sovereign. Built for EU operators under NIS2, DORA, ISO 27001, and ANSSI BP-028.",
+    "cta_primary": "Book a 15-min call",
+    "cta_secondary": "Try the demo"
+  },
+  "metrics": {
+    "rollback_value": "<90s",
+    "rollback_label": "Fleet rollback",
+    "controls_value": "16",
+    "controls_label": "Compliance controls",
+    "frameworks_value": "4",
+    "frameworks_label": "Frameworks",
+    "license_value": "MIT / AGPL",
+    "license_label": "Open source"
+  },
+  "cta": {
+    "title": "Run a 3-month pilot. 5–15 hosts. Free.",
+    "subtitle": "Move your regulated workloads to a declarative substrate. Keep the rest where it is. We help you stand up the regulated zone with signed evidence ready for your auditor, whether you already run NixOS or migrate from Ansible / Puppet / Chef during the 12 weeks.",
+    "button": "Book a 15-min call"
+  },
+  "footer": {
+    "tagline": "Signed GitOps fleet management for regulated Europe.",
+    "license": "MIT framework · AGPL control plane · European sovereignty · 2026",
+    "product_heading": "Product",
+    "program_heading": "Program",
+    "legal_heading": "Legal",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "pageHeader": {
+    "product": {
+      "title": "The signed GitOps loop",
+      "subtitle": "Commit → CI signs → control plane verifies → agent verifies → activate. Each step is its own cryptographic gate."
+    },
+    "compliance": {
+      "title": "16 controls. 4 frameworks. Signed evidence.",
+      "subtitle": "NIS2 · DORA · ISO 27001 · ANSSI BP-028. Article-by-article mapping, auditable offline."
+    },
+    "complianceNis2": {
+      "title": "NIS2 - Article 21 mapping",
+      "subtitle": "Ten sub-articles. The 16 typed controls satisfy each through framework presets."
+    },
+    "complianceDora": {
+      "title": "DORA - Chapter III mapping",
+      "subtitle": "Regulation 2022/2554, applicable since 17 January 2025. Articles 8, 9, 12, 17."
+    },
+    "complianceIso27001": {
+      "title": "ISO 27001:2022 - Annex A mapping",
+      "subtitle": "Annex A controls across A.5 (organisational) and A.8 (technological)."
+    },
+    "complianceAnssi": {
+      "title": "ANSSI BP-028 v2.0 - mapping",
+      "subtitle": "Recommendations R7 through R14 + R33. Four hardening levels, three host categories."
+    },
+    "complianceNis2Entity": {
+      "title": "NIS2 entity classification",
+      "subtitle": "Essential vs. important: how the entity-type flag shifts thresholds across the fleet."
+    },
+    "vision": {
+      "title": "Cryptographic citizenship of the fleet",
+      "subtitle": "The signed-artifact chain establishes identity in software today. Hardware binding anchors it in the silicon. Foundation already shipping."
+    },
+    "pilot": {
+      "title": "3-month pilot. 5–15 hosts. Zero cost.",
+      "subtitle": "Your regulated zone on a declarative substrate. Signed NIS2 evidence packet at month 3. Sovereignty preserved from day one."
+    },
+    "demo": {
+      "title": "4 VMs. 10 minutes. The full GitOps loop, locally.",
+      "subtitle": "Bootstrap a working fleet on your laptop and watch the signed-artifact chain converge."
+    },
+    "about": {
+      "title": "About Arcanesys",
+      "subtitle": "Why we built this. Why now. What this is not."
+    },
+    "contact": {
+      "title": "Book a 15-minute call",
+      "subtitle": "Tell us about your fleet and your regulatory regime. We get back to you within one business day."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "subtitle": "GDPR-minimal. We collect only what we need to talk to you."
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "subtitle": "Read the small print."
+    }
+  },
+  "contactForm": {
+    "name": "Name",
+    "email": "Email",
+    "org": "Organisation",
+    "role": "Role",
+    "fleet_size": "Fleet size today (NixOS hosts, can be 0)",
+    "regime": "Regulatory regime",
+    "regime_help": "Select all that apply",
+    "regime_nis2_essential": "NIS2 essential",
+    "regime_nis2_important": "NIS2 important",
+    "regime_dora": "DORA",
+    "regime_iso": "ISO 27001",
+    "regime_anssi": "ANSSI BP-028",
+    "regime_secnumcloud": "SecNumCloud",
+    "regime_other": "Other",
+    "regime_unsure": "Not sure",
+    "problem": "What problem are you trying to solve?",
+    "problem_help": "Optional. ~200 characters is plenty.",
+    "submit": "Send",
+    "honeypot": "Leave this empty",
+    "success_title": "Thanks - message received.",
+    "success_body": "We will get back to you within one business day. In the meantime, the demo repo is at github.com/arcanesys/nixfleet-demo."
+  }
+}

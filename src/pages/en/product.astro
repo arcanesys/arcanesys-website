@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en';
+const pathname = Astro.url.pathname;
+---
+
+<Layout title="Product - The signed GitOps loop - Arcanesys" lang={lang} description="Commit → CI signs → control plane verifies → agent verifies independently → activate. The trust model, magic rollback with deadline, channel-gated waves, closure-hash quarantine.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.product.title"
+    subtitleKey="pageHeader.product.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <h2><span class="num">01</span>The signed GitOps loop</h2>
+    <p>
+      Each fleet change is a Git commit. The CI runner evaluates the flake, canonicalises
+      <code>fleet.resolved.json</code> (JCS, RFC&nbsp;8785), and signs it with a dedicated Ed25519
+      release key. The closure is pushed to a Nix binary cache. The control plane polls the
+      Git forge, verifies the signature, and dispatches per-host generations over mTLS. Each
+      agent verifies the same signature <em>independently</em> before activating.
+    </p>
+
+    <pre class="font-mono text-[0.78em] bg-dark text-paper p-5 rounded overflow-x-auto leading-relaxed"><code>Fleet repository (self-hosted Git forge)
+  │  git push
+  ▼
+CI runner
+  •  nix flake check
+  •  nixfleet-release builds + canonicalises (JCS)
+  •  signs fleet.resolved.json (Ed25519, CI release key)
+  •  pushes closures to the binary cache
+  │  signed artifact + primed cache
+  ▼
+Control Plane (Rust, Axum, SQLite, AGPL)
+  •  verifies CI release signature
+  •  verifies revocations sidecar
+  •  gates /v1/* on artifact_primed + revocations_primed
+  •  reconciler (pure function) emits state transitions
+  •  HOLDS NO SIGNING KEYS
+  │  mTLS (client cert per host)
+  ▼
+Agent (Rust, MIT)
+  •  verifies CI signature INDEPENDENTLY of CP
+  •  fetches closure from the binary cache
+  •  activates via nixos-rebuild switch
+  •  magic rollback on deadline silence
+  •  closure-hash quarantine on activation failure (24h)</code></pre>
+
+    <h2><span class="num">02</span>The trust model - the killer property</h2>
+    <p>
+      <strong>No single component in the trust path holds both signing power and runtime authority.</strong>
+    </p>
+    <ul>
+      <li>The <strong>CI release key</strong> lives in the CI runner (or HSM in production). It signs but does not deploy.</li>
+      <li>The <strong>control plane</strong> verifies signatures and holds no signing key. Compromising the CP gets an attacker zero deploy authority. Agents reject any artifact not signed by the authorised release key.</li>
+      <li>The <strong>agent</strong> verifies signatures <em>again</em>, independently of CP, before activating any closure.</li>
+      <li>The <strong>org-root key</strong> lives on the operator workstation (or HSM). It only mints bootstrap tokens and rotates the CI release key. Offline at all other times.</li>
+    </ul>
+    <blockquote>
+      <strong>Compromise of the control plane is an outage, not a breach.</strong>
+      The CP can be rebuilt from empty state given Git history and Git-forge + binary-cache availability.
+      This property is unique in the fleet-management market.
+    </blockquote>
+
+    <h2><span class="num">03</span>Magic rollback with deadline</h2>
+    <p>
+      After activation, the agent opens a confirm window. If it cannot post a signed
+      acknowledgment within the deadline, the previous generation is restored automatically.
+      The safety property of canary deployments is a <em>protocol property</em>, not a feature
+      of an external monitoring tool. Switch-inhibitor detection defers activation when dbus,
+      systemd, or kernel changes are pending.
+    </p>
+
+    <h2><span class="num">04</span>Channel-gated waves</h2>
+    <p>
+      Rollout policies decompose the fleet into waves (canary, staged, all-at-once) with
+      configurable soak times. A wave progresses only when every health-probe in the prior
+      wave passes. <code>channelEdges</code> order channels relative to each other -
+      <code>edge</code> must converge before <code>stable</code> may start, guaranteeing real
+      pre-production testing. <code>disruptionBudgets</code> cap concurrent in-flight hosts
+      per selector.
+    </p>
+
+    <h2><span class="num">05</span>Closure-hash quarantine</h2>
+    <p>
+      A failed activation puts that closure hash on a 24-hour refusal list, preventing
+      redeploy loops. The host will refuse to re-attempt activation of the same broken
+      closure until the quarantine expires or the operator clears it explicitly.
+    </p>
+
+    <h2><span class="num">06</span>Current capability</h2>
+    <table>
+      <thead><tr><th>Component</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Framework Nix (<code>mkHost</code>, <code>mkFleet</code>, <code>mkVmApps</code>)</td><td>Functional, typed schema, 7 golden + 9 negative <code>mkFleet</code> fixtures</td></tr>
+        <tr><td>Control plane (Rust)</td><td>Axum, SQLite, freshness + revocations gating</td></tr>
+        <tr><td>Agent (Rust)</td><td>Polling + magic rollback with deadline</td></tr>
+        <tr><td>Reconciler (Rust)</td><td>Pure function, lifecycle parity + soak tests</td></tr>
+        <tr><td>CLI (Rust)</td><td><code>status</code> / <code>rollout trace</code> / <code>mint-token</code> / <code>mint-operator-cert</code></td></tr>
+        <tr><td>mTLS agent ↔ CP</td><td>Implemented (rustls, client certificates, revocation list)</td></tr>
+        <tr><td>Signed-artifact chain (Ed25519)</td><td>Implemented end-to-end (CI signs → CP verifies → agent verifies)</td></tr>
+        <tr><td>Channel-gated waves</td><td>Implemented (<code>rolloutPolicies</code> + <code>channelEdges</code> + <code>disruptionBudgets</code>)</td></tr>
+        <tr><td>E2E tests</td><td>15 fleet-harness scenarios (signed-roundtrip, auditor-chain, deadline-expiry, rollback-policy, …)</td></tr>
+        <tr><td>Current LOC</td><td>Run <code>tools/loc.sh</code> in the <a href="https://github.com/arcanesys/nixfleet">nixfleet</a> repo</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">07</span>Honest scoping - what is not yet there</h2>
+    <ul>
+      <li><strong>SQLite ceiling ~150 hosts.</strong> Planned: connection pool or async Postgres.</li>
+      <li><strong>Darwin agent runs.</strong> Multi-host Darwin rollouts are not yet exercised by fleet-harness.</li>
+      <li><strong>No air-gap mode yet.</strong> Specified in RFC-0007, foundation already shipping. <a href={`/${lang}/vision/`}>See the trust trajectory</a>.</li>
+    </ul>
+
+    <h2><span class="num">08</span>License + repositories</h2>
+    <ul>
+      <li><a href="https://github.com/arcanesys/nixfleet">arcanesys/nixfleet</a>: framework + agent (MIT) + control plane (AGPL)</li>
+      <li><a href="https://github.com/arcanesys/nixfleet-compliance">arcanesys/nixfleet-compliance</a>: 16 controls, 4 frameworks (MIT)</li>
+      <li><a href="https://github.com/arcanesys/nixfleet-demo">arcanesys/nixfleet-demo</a>: 4-VM reference fleet (MIT)</li>
+    </ul>
+    <p>
+      Release signing key fingerprint: <code>EFFB 14F3 8A25 56AE 77A6 E88F CA66 F4CA 449E A28B</code>
+      (ed25519, hardware-backed). Verify any release tag with <code>git tag -v v0.2.0</code> after
+      fetching the public key from the repository.
+    </p>
+
+    <p class="text-center mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+      <a href={`/${lang}/demo/`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        See it run - 10 minutes locally →
+      </a>
+      <a href={`/${lang}/pilot/`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        Read about the pilot →
+      </a>
+    </p>
+  </article>
+
+  <CtaSection lang={lang} />
+  <Footer lang={lang} />
+</Layout>

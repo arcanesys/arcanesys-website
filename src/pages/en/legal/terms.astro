@@ -1,0 +1,94 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Footer from '../../../components/Footer.astro';
+
+const lang = 'en';
+const pathname = Astro.url.pathname;
+const updated = '2026-05-14';
+---
+
+<Layout title="Terms of Use - Arcanesys" lang={lang} description="Terms of use for arcanesys.fr. Licensing (MIT/AGPL), honest maturity disclosure, liability disclaimer. Governed by French law.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.terms.title"
+    subtitleKey="pageHeader.terms.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <p><strong>Last updated:</strong> {updated}</p>
+
+    <h2><span class="num">01</span>What this site is</h2>
+    <p>
+      This site (arcanesys.fr) presents the NixFleet framework and its commercial wrap. It
+      links to source repositories on GitHub, technical documentation, and a contact form for
+      pilot inquiries. It is provided as informational material.
+    </p>
+
+    <h2><span class="num">02</span>Licensing of the software</h2>
+    <ul>
+      <li><strong>nixfleet</strong> framework + agent: MIT license</li>
+      <li><strong>nixfleet</strong> control plane: AGPL-3.0</li>
+      <li><strong>nixfleet-compliance</strong>: MIT license</li>
+      <li><strong>nixfleet-demo</strong>: MIT license</li>
+    </ul>
+    <p>
+      Each repository's <code>LICENSE</code> file is the authoritative source. By using the
+      software, you accept the relevant licenses.
+    </p>
+
+    <h2><span class="num">03</span>Honest maturity disclosure</h2>
+    <p>
+      NixFleet is tested with 14 end-to-end fleet-harness scenarios and 72 Rust test files.
+      The signed-artifact chain has been exercised on operator hardware. <strong>It is not
+      yet certified for sovereign deployments</strong> (no SecNumCloud, no ANSSI
+      qualification at this date. See <a href={`/${lang}/vision/`}>Vision</a> for the
+      trajectory). Pilot operators run NixFleet on pre-production or non-critical production
+      hosts. Production deployment to critical systems should follow a successful pilot.
+    </p>
+
+    <h2><span class="num">04</span>Pilot offer</h2>
+    <p>
+      Pilots are free of charge, governed by a separate written agreement (the Pilot SOW)
+      executed between Arcanesys and the operator's legal entity. The full conditions of a
+      pilot are detailed at <a href={`/${lang}/pilot/`}>/pilot</a> and in the SOW. They
+      override any informational content on this site.
+    </p>
+
+    <h2><span class="num">05</span>Liability disclaimer</h2>
+    <p>
+      The software is provided "as is" without warranty of any kind, as stated in the
+      respective MIT and AGPL licenses. Nothing on this site constitutes legal or compliance
+      advice. Consult your qualified counsel or compliance officer for binding regulatory
+      interpretation (NIS2, DORA, ISO 27001, ANSSI BP-028, etc.).
+    </p>
+    <p>
+      Within the limits of applicable EU consumer protection law, Arcanesys's total liability
+      arising from informational content on this site is limited to the amount paid by the
+      visitor (zero for the public site). Commercial relationships are governed by the
+      relevant contracts (pilot SOW, support agreement, license agreement).
+    </p>
+
+    <h2><span class="num">06</span>Third-party trademarks and external links</h2>
+    <p>
+      NixOS is a trademark of the NixOS Foundation. Other trademarks are property of their
+      respective owners. External links are provided for convenience; Arcanesys is not
+      responsible for the content of external sites.
+    </p>
+
+    <h2><span class="num">07</span>Governing law</h2>
+    <p>
+      These terms are governed by French law. Disputes that cannot be resolved amicably fall
+      under the jurisdiction of the competent courts of the operator's registered office in
+      France.
+    </p>
+
+    <h2><span class="num">08</span>Contact</h2>
+    <p>
+      Questions about these terms: <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a>.
+    </p>
+  </article>
+
+  <Footer lang={lang} />
+</Layout>
