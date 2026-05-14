@@ -1,0 +1,97 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Footer from '../../../components/Footer.astro';
+
+const lang = 'fr';
+const pathname = Astro.url.pathname;
+const updated = '2026-05-14';
+---
+
+<Layout title="Conditions d'utilisation - Arcanesys" lang={lang} description="Conditions d'utilisation pour arcanesys.fr. Licences (MIT/AGPL), annonce de maturité honnête, limitation de responsabilité. Régies par le droit français.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.terms.title"
+    subtitleKey="pageHeader.terms.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <p><strong>Dernière mise à jour :</strong> {updated}</p>
+
+    <h2><span class="num">01</span>Ce qu'est ce site</h2>
+    <p>
+      Ce site (arcanesys.fr) présente le framework NixFleet et son enveloppe commerciale. Il
+      pointe vers les dépôts sources sur GitHub, la documentation technique, et un formulaire
+      de contact pour les demandes de pilote. Il est fourni à titre informatif.
+    </p>
+
+    <h2><span class="num">02</span>Licences du logiciel</h2>
+    <ul>
+      <li><strong>nixfleet</strong> framework + agent : licence MIT</li>
+      <li><strong>nixfleet</strong> control plane : AGPL-3.0</li>
+      <li><strong>nixfleet-compliance</strong> : licence MIT</li>
+      <li><strong>nixfleet-demo</strong> : licence MIT</li>
+    </ul>
+    <p>
+      Le fichier <code>LICENSE</code> de chaque dépôt fait foi. En utilisant le logiciel,
+      vous acceptez les licences correspondantes.
+    </p>
+
+    <h2><span class="num">03</span>Annonce honnête de maturité</h2>
+    <p>
+      NixFleet est testé par 14 scénarios E2E fleet-harness et 72 fichiers de tests Rust.
+      La chaîne d'artefacts signés a été exercée sur du matériel opérateur. <strong>Il
+      n'est pas encore certifié pour des déploiements souverains</strong> (pas de
+      SecNumCloud, pas de qualification ANSSI à ce jour. Voir
+      <a href={`/${lang}/vision/`}>Vision</a> pour la trajectoire). Les opérateurs pilotes
+      font tourner NixFleet sur des hôtes en pré-production ou production non-critique.
+      Le déploiement sur des systèmes critiques doit suivre un pilote concluant.
+    </p>
+
+    <h2><span class="num">04</span>Offre pilote</h2>
+    <p>
+      Les pilotes sont gratuits, encadrés par un accord écrit séparé (le SOW Pilote) exécuté
+      entre Arcanesys et l'entité légale de l'opérateur. Les conditions complètes d'un pilote
+      sont détaillées sur <a href={`/${lang}/pilot/`}>/pilot</a> et dans le SOW. Elles
+      prévalent sur tout contenu informationnel de ce site.
+    </p>
+
+    <h2><span class="num">05</span>Limitation de responsabilité</h2>
+    <p>
+      Le logiciel est fourni « tel quel » sans garantie d'aucune sorte, conformément aux
+      licences MIT et AGPL respectives. Rien sur ce site ne constitue un avis juridique ou
+      de conformité. Consultez votre conseil qualifié ou votre responsable conformité pour
+      toute interprétation réglementaire contraignante (NIS2, DORA, ISO 27001, ANSSI BP-028,
+      etc.).
+    </p>
+    <p>
+      Dans les limites du droit européen applicable à la protection des consommateurs, la
+      responsabilité totale d'Arcanesys découlant du contenu informationnel de ce site est
+      limitée au montant payé par le visiteur (zéro pour le site public). Les relations
+      commerciales sont régies par les contrats afférents (SOW pilote, contrat de support,
+      contrat de licence).
+    </p>
+
+    <h2><span class="num">06</span>Marques tierces et liens externes</h2>
+    <p>
+      NixOS est une marque de la NixOS Foundation. Les autres marques sont la propriété de
+      leurs détenteurs respectifs. Les liens externes sont fournis pour la commodité ;
+      Arcanesys n'est pas responsable du contenu des sites externes.
+    </p>
+
+    <h2><span class="num">07</span>Droit applicable</h2>
+    <p>
+      Les présentes conditions sont régies par le droit français. Les litiges qui ne peuvent
+      être résolus à l'amiable relèvent de la juridiction des tribunaux compétents du siège
+      social de l'opérateur en France.
+    </p>
+
+    <h2><span class="num">08</span>Contact</h2>
+    <p>
+      Questions sur ces conditions : <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a>.
+    </p>
+  </article>
+
+  <Footer lang={lang} />
+</Layout>

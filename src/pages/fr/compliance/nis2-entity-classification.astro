@@ -1,0 +1,58 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Footer from '../../../components/Footer.astro';
+
+const lang = 'fr';
+const pathname = Astro.url.pathname;
+---
+
+<Layout title="Classification d'entité NIS2 - Arcanesys" lang={lang} description="Essentielle vs importante : seuils NIS2 par type d'entité — comment le flag décale fréquence de collecte, rétention, niveau de hardening, RTO, MFA et blocage sur CVE à travers la flotte.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.complianceNis2Entity.title"
+    subtitleKey="pageHeader.complianceNis2Entity.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <p>
+      Les opérateurs déclarent <code>compliance.frameworks.nis2.entityType = "essential"</code>
+      ou <code>"important"</code>. Les seuils s'ajustent en conséquence. Les valeurs ci-dessous
+      sont des options Nix, évaluées au moment du build système. <em>DORA dispose d'un flag
+      analogue « critical provider », ISO 27001 utilise <code>certificationScope =
+      "full" | "partial"</code>, et ANSSI utilise un niveau à quatre paliers
+      (<code>minimal | intermediary | reinforced | high</code>).</em>
+    </p>
+
+    <table>
+      <thead><tr><th>Paramètre</th><th>Essentielle</th><th>Importante</th></tr></thead>
+      <tbody>
+        <tr><td>Fréquence collecte preuves</td><td>Horaire</td><td>Quotidienne 06:00</td></tr>
+        <tr><td>SSH idle timeout</td><td>15 min</td><td>30 min</td></tr>
+        <tr><td>Alerte staleness inputs</td><td>14 jours</td><td>30 jours</td></tr>
+        <tr><td>Rétention audit log</td><td>730 jours</td><td>365 jours</td></tr>
+        <tr><td>Rétention sauvegardes</td><td>730 jours</td><td>365 jours</td></tr>
+        <tr><td>Vérification sauvegarde</td><td>Quotidienne</td><td>Hebdomadaire</td></tr>
+        <tr><td>Niveau hardening</td><td><code>strict</code></td><td><code>standard</code></td></tr>
+        <tr><td>Générations rollback min.</td><td>10</td><td>5</td></tr>
+        <tr><td>RTO cible</td><td>4 heures</td><td>24 heures</td></tr>
+        <tr><td>Âge max nixpkgs</td><td>14 jours</td><td>30 jours</td></tr>
+        <tr><td>Bloque sur CVE critique</td><td>Oui</td><td>Non</td></tr>
+        <tr><td>MFA requis</td><td>Oui</td><td>Non</td></tr>
+      </tbody>
+    </table>
+
+    <p class="text-[0.88em] text-muted">
+      Valeurs par défaut encodées dans <a href="https://github.com/arcanesys/nixfleet-compliance/blob/main/frameworks/nis2.nix">frameworks/nis2.nix</a> dans le repo de conformité. Chaque paramètre est surchargeable par hôte via l'option <code>compliance.controls.&lt;nom&gt;.*</code> correspondante.
+    </p>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/compliance/`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        ← Retour à conformité
+      </a>
+    </p>
+  </article>
+
+  <Footer lang={lang} />
+</Layout>

@@ -1,0 +1,41 @@
+---
+import { t } from '../i18n/utils';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<footer class="bg-dark border-t border-paper/[0.06] px-10 py-10 font-mono text-[10px] tracking-[2px] text-paper/35">
+  <div class="max-w-content mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <div>
+      <div class="text-paper/50 mb-3">ARCANE<span class="text-indigo">SYS</span></div>
+      <div class="leading-relaxed">{t(lang, 'footer.tagline')}</div>
+    </div>
+    <div>
+      <div class="text-paper/50 mb-3">{t(lang, 'footer.product_heading')}</div>
+      <a href={`/${lang}/product/`} class="block py-1 text-paper/35 hover:text-paper/70 no-underline">{t(lang, 'nav.product')}</a>
+      <a href={`/${lang}/compliance/`} class="block py-1 text-paper/35 hover:text-paper/70 no-underline">{t(lang, 'nav.compliance')}</a>
+      <a href={`/${lang}/vision/`} class="block py-1 text-paper/35 hover:text-paper/70 no-underline">{t(lang, 'nav.vision')}</a>
+      <a href={`/${lang}/demo/`} class="block py-1 text-paper/35 hover:text-paper/70 no-underline">{t(lang, 'nav.demo')}</a>
+    </div>
+    <div>
+      <div class="text-paper/50 mb-3">{t(lang, 'footer.program_heading')}</div>
+      <a href={`/${lang}/pilot/`} class="block py-1 text-paper/35 hover:text-paper/70 no-underline">{t(lang, 'nav.pilot')}</a>
+      <a href={`/${lang}/about/`} class="block py-1 text-paper/35 hover:text-paper/70 no-underline">{t(lang, 'nav.about')}</a>
+      <a href={`/${lang}/contact/`} class="block py-1 text-paper/35 hover:text-paper/70 no-underline">{t(lang, 'nav.contact')}</a>
+    </div>
+    <div>
+      <div class="text-paper/50 mb-3">{t(lang, 'footer.legal_heading')}</div>
+      <a href={`/${lang}/legal/privacy/`} class="block py-1 text-paper/35 hover:text-paper/70 no-underline">{t(lang, 'footer.privacy')}</a>
+      <a href={`/${lang}/legal/terms/`} class="block py-1 text-paper/35 hover:text-paper/70 no-underline">{t(lang, 'footer.terms')}</a>
+      <a href="https://github.com/arcanesys/nixfleet" target="_blank" rel="noopener" class="block py-1 text-paper/35 hover:text-paper/70 no-underline">GitHub ↗</a>
+      <a href="mailto:contact@arcanesys.fr" class="block py-1 text-paper/35 hover:text-paper/70 no-underline">contact@arcanesys.fr</a>
+    </div>
+  </div>
+  <div class="max-w-content mx-auto pt-6 border-t border-paper/[0.06] text-paper/30 text-center">
+    {t(lang, 'footer.license')}
+  </div>
+</footer>

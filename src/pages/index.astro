@@ -1,0 +1,40 @@
+---
+// Root: detect browser language and redirect to /fr/ or /en/.
+// No <Layout> here - this is a one-shot redirect surface, not a content page.
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Arcanesys</title>
+  <script is:inline>
+    (function () {
+      try {
+        var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        var target = lang.indexOf('fr') === 0 ? '/fr/' : '/en/';
+        location.replace(target);
+      } catch (_) {
+        location.replace('/en/');
+      }
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=/en/" />
+  </noscript>
+  <style>
+    body { margin: 0; background: #0a0e1a; color: #faf8f5; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; justify-content: center; height: 100vh; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+    a { color: #818cf8; text-decoration: none; margin: 0 12px; }
+  </style>
+</head>
+<body>
+  <noscript>
+    <div>
+      <a href="/en/">English</a>
+      <a href="/fr/">Français</a>
+    </div>
+  </noscript>
+</body>
+</html>

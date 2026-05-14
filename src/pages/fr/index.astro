@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'fr';
+const pathname = Astro.url.pathname;
+
+const crises = [
+  {
+    title: 'Dérive de configuration',
+    accent: 'border-l-indigo',
+    body: 'Les outils impératifs gèrent l\'état <em>souhaité</em>. Ils ne peuvent pas prouver l\'état <em>réel</em>. La dérive est mathématiquement inévitable.',
+    answer: 'Reproductible par construction. Chaque commit produit une closure adressée par hash, identique sur chaque hôte.',
+  },
+  {
+    title: 'Souveraineté',
+    accent: 'border-l-amber',
+    body: 'Les control planes cloud américains (Jamf, Intune, AWS SSM) placent votre capacité de déploiement sous Cloud Act, conditions tarifaires tierces, et disponibilité externe.',
+    answer: '100% auto-hébergé. Forge Git, cache binaire, control plane - tout sur votre infrastructure. Si nous disparaissons, votre flotte continue.',
+  },
+  {
+    title: 'Sécurité rapportée',
+    accent: 'border-l-emerald',
+    body: 'EDR, SIEM, scanners SBOM sont des couches de détection empilées sur des systèmes mutables. Ils surveillent, ils ne changent pas ce qui s\'exécute.',
+    answer: 'La sécurité émerge du modèle système : Nix store adressé par hash, chaîne d\'artefacts signés de bout en bout, quarantaine de closure, impermanence.',
+  },
+  {
+    title: 'Conformité',
+    accent: 'border-l-rose',
+    body: 'NIS2, DORA, ISO 27001, ANSSI BP-028 exigent des preuves auditables. Les piles traditionnelles produisent des assertions, pas des preuves.',
+    answer: 'Conformité comme porte de release, pas comme scanner. Le build refuse les closures non conformes ; l\'auditeur vérifie la chaîne hors ligne, sans devoir nous faire confiance.',
+  },
+];
+---
+
+<Layout title="Arcanesys - Gestion de flotte NixOS en GitOps signé" lang={lang} description="Gestion de flotte NixOS déclarative, signée, souveraine pour les opérateurs européens sous NIS2, DORA et ANSSI BP-028. Chaîne d'artefacts signés de bout en bout.">
+  <Hero lang={lang} pathname={pathname} />
+
+
+  <section class="max-w-content mx-auto px-10 py-16">
+    <div class="text-center mb-10">
+      <div class="font-mono text-[10px] tracking-[4px] text-indigo uppercase mb-2">Quatre crises. Une architecture.</div>
+      <h2 class="font-display text-[clamp(1.6rem,3vw,2.2rem)] font-black text-ink leading-tight tracking-tight">
+        Pourquoi les outils standards échouent dans l'Europe régulée
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {crises.map((c) => (
+        <div class:list={['bg-paper-2 border border-paper-3 p-6 border-l-[3px]', c.accent]}>
+          <h3 class="font-display text-lg font-bold text-ink mb-2">{c.title}</h3>
+          <p class="text-[0.92em] text-muted leading-relaxed mb-3" set:html={c.body} />
+          <p class="text-[0.92em] text-ink leading-relaxed"><strong>NixFleet :</strong> {c.answer}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-paper-2 border-y border-paper-3">
+    <div class="max-w-prose mx-auto px-10 py-14">
+      <div class="font-mono text-[10px] tracking-[4px] text-indigo uppercase mb-2 text-center">En une phrase</div>
+      <h2 class="font-display text-[clamp(1.5rem,2.6vw,2rem)] font-black text-ink leading-tight tracking-tight text-center mb-6">
+        Migrez vos charges réglementées sur un substrat déclaratif
+      </h2>
+      <p class="text-[1.05rem] leading-relaxed text-ink text-center">
+        Laissez le reste là où il est. NixFleet place votre zone réglementée - 5 à 15 hôtes
+        qui portent votre exposition NIS2 / DORA / ANSSI - sur une boucle GitOps à artefacts
+        signés. Commit → CI signe → control plane vérifie → agent vérifie indépendamment →
+        activation avec rollback magique à deadline. <strong>Aucune clé de signature dans
+        le control plane.</strong> Une compromission du CP est une panne, pas une fuite.
+      </p>
+      <div class="text-center mt-8">
+        <a href={`/${lang}/product/`} class="link-button">
+          Voir la boucle GitOps signée →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-content mx-auto px-10 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a href={`/${lang}/compliance/`} class="block bg-paper-2 border border-paper-3 p-6 no-underline hover:border-indigo transition-colors">
+        <div class="font-mono text-[10px] tracking-[3px] text-emerald uppercase mb-2">Conformité</div>
+        <h3 class="font-display text-base font-bold text-ink mb-2">16 contrôles · 4 référentiels</h3>
+        <p class="text-[0.88em] text-muted leading-relaxed">Cartographie NIS2 Article 21, preuves signées par hôte, moteur de gouvernance avec exceptions par règle.</p>
+      </a>
+      <a href={`/${lang}/vision/`} class="block bg-paper-2 border border-paper-3 p-6 no-underline hover:border-indigo transition-colors">
+        <div class="font-mono text-[10px] tracking-[3px] text-amber uppercase mb-2">Vision</div>
+        <h3 class="font-display text-base font-bold text-ink mb-2">Citoyenneté cryptographique</h3>
+        <p class="text-[0.88em] text-muted leading-relaxed">Identité ancrée TPM, secrets scellés PCR, canaux signés à seuil. Spécifié en 4 RFCs.</p>
+      </a>
+      <a href={`/${lang}/pilot/`} class="block bg-paper-2 border border-paper-3 p-6 no-underline hover:border-indigo transition-colors">
+        <div class="font-mono text-[10px] tracking-[3px] text-rose uppercase mb-2">Pilote</div>
+        <h3 class="font-display text-base font-bold text-ink mb-2">3 mois · 5 à 15 machines · sans frais</h3>
+        <p class="text-[0.88em] text-muted leading-relaxed">Votre zone réglementée sur un substrat déclaratif. Paquet de preuves NIS2 signé à 3 mois. Migration depuis Ansible / Puppet / Chef incluse.</p>
+      </a>
+    </div>
+  </section>
+
+  <CtaSection lang={lang} />
+  <Footer lang={lang} />
+</Layout>

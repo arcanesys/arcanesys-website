@@ -1,0 +1,55 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Footer from '../../../components/Footer.astro';
+
+const lang = 'en';
+const pathname = Astro.url.pathname;
+---
+
+<Layout title="NIS2 Article 21 mapping - Arcanesys" lang={lang} description="Article-by-article mapping of NIS2 Directive 2022/2555 Article 21 against the 16 typed compliance controls in nixfleet-compliance.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.complianceNis2.title"
+    subtitleKey="pageHeader.complianceNis2.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <p>
+      NIS2 Article 21 lists ten sub-articles of cybersecurity risk-management measures
+      essential and important entities must implement. The mapping below shows which of the
+      16 typed controls in <a href="https://github.com/arcanesys/nixfleet-compliance"><code>nixfleet-compliance</code></a>
+      satisfy each sub-article.
+    </p>
+
+    <table>
+      <thead><tr><th>Article</th><th>Requirement</th><th>Controls</th></tr></thead>
+      <tbody>
+        <tr><td>21(a)</td><td>Risk analysis &amp; info security policy</td><td><code>_baseline-hardening</code>, <code>_network-segmentation</code>, <code>_secure-boot</code></td></tr>
+        <tr><td>21(b)</td><td>Incident handling</td><td><code>_incident-response</code></td></tr>
+        <tr><td>21(c)</td><td>Business continuity, backup, DR</td><td><code>_backup-retention</code>, <code>_disaster-recovery</code></td></tr>
+        <tr><td>21(d)</td><td>Supply chain security</td><td><code>_supply-chain</code></td></tr>
+        <tr><td>21(e)</td><td>Vulnerability handling</td><td><code>_vulnerability-mgmt</code>, <code>_change-management</code></td></tr>
+        <tr><td>21(f)</td><td>Effectiveness assessment</td><td><code>_audit-logging</code></td></tr>
+        <tr><td>21(g)</td><td>Cyber hygiene &amp; training</td><td><code>_baseline-hardening</code></td></tr>
+        <tr><td>21(h)</td><td>Cryptography</td><td><code>_encryption-at-rest</code>, <code>_encryption-in-transit</code>, <code>_key-management</code></td></tr>
+        <tr><td>21(i)</td><td>Access control &amp; asset management</td><td><code>_access-control</code>, <code>_asset-inventory</code></td></tr>
+        <tr><td>21(j)</td><td>MFA &amp; secure comms</td><td><code>_authentication</code></td></tr>
+      </tbody>
+    </table>
+
+    <p class="text-[0.88em] text-muted">
+      Canonical control source: <a href="https://github.com/arcanesys/nixfleet-compliance/blob/main/docs/nis2-mapping.md">docs/nis2-mapping.md</a> in the compliance repo.
+      Operator declares the entity classification via <code>compliance.frameworks.nis2.entityType = "essential" | "important"</code> — see <a href={`/${lang}/compliance/nis2-entity-classification/`}>NIS2 entity classification</a>.
+    </p>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/compliance/`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        ← Back to compliance
+      </a>
+    </p>
+  </article>
+
+  <Footer lang={lang} />
+</Layout>

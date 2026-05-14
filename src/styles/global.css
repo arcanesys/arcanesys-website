@@ -1,0 +1,220 @@
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
+
+/* ── Prose (markdown content) ── */
+.prose h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15em;
+  font-weight: 700;
+  color: #18130c;
+  line-height: 1.15;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #3730a3;
+  letter-spacing: -0.01em;
+}
+
+.prose h2 span.num {
+  color: #3730a3;
+  margin-right: 0.4rem;
+}
+
+.prose h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95em;
+  font-weight: 700;
+  color: #334155;
+  margin-top: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.prose p {
+  margin-bottom: 0.75rem;
+}
+
+.prose strong {
+  color: #18130c;
+  font-weight: 600;
+}
+
+.prose em {
+  color: #92400e;
+  font-style: italic;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0 1.2rem;
+  font-size: 0.88em;
+}
+
+.prose thead th {
+  background: #18130c;
+  color: #faf8f5;
+  font-weight: 600;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 0.92em;
+}
+
+.prose thead th:first-child { border-radius: 6px 0 0 0; }
+.prose thead th:last-child { border-radius: 0 6px 0 0; }
+
+.prose tbody td {
+  padding: 7px 12px;
+  border-bottom: 1px solid #f2ede4;
+  vertical-align: top;
+}
+
+.prose tbody tr:nth-child(even) td {
+  background: #f2ede4;
+}
+
+.prose ul {
+  padding-left: 1.4rem;
+  margin-bottom: 0.75rem;
+  list-style-type: disc;
+}
+
+.prose ol {
+  padding-left: 1.6rem;
+  margin-bottom: 0.75rem;
+  list-style-type: decimal;
+}
+
+.prose li {
+  margin-bottom: 0.25rem;
+}
+
+.prose li::marker {
+  color: #3730a3;
+}
+
+/* In-prose links: underline only, no colour shift. Discoverable without
+   needing hover. Card / CTA / nav links that opt out via inline
+   class="no-underline" are untouched. */
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Mid-tier action link: indigo uppercase label by default, becomes a
+   filled button on hover. Used for "see X →" / "← back to X" navigation
+   links that move the reader to the next funnel page. Padding is always
+   present so the button frame doesn't shift layout on hover. */
+.link-button {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #3730a3;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.link-button:hover {
+  background-color: #3730a3;
+  color: #faf8f5;
+}
+
+.prose blockquote {
+  padding: 1rem 1.3rem;
+  background: #f2ede4;
+  border-left: 3px solid #3730a3;
+  margin: 1.2rem 0;
+  font-size: 0.92em;
+  line-height: 1.5;
+}
+
+.prose blockquote strong {
+  color: #18130c;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid #e8e0d2;
+  margin: 2rem 0;
+}
+
+.prose code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88em;
+  background: #f2ede4;
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+/* code inside a <pre> is a block, not inline - drop the inline-code chrome */
+.prose pre {
+  margin: 1.2rem 0;
+}
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+  color: inherit;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Font faces ── */
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/fonts/fraunces-variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora-variable.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora-italic-variable.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono-variable.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #18130c;
+  background: #faf8f5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Grain overlay ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}

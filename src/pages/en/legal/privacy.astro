@@ -1,0 +1,90 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Footer from '../../../components/Footer.astro';
+
+const lang = 'en';
+const pathname = Astro.url.pathname;
+const updated = '2026-05-14';
+---
+
+<Layout title="Privacy Policy - Arcanesys" lang={lang} description="GDPR-minimal privacy policy. No analytics, no tracking, no third-party sharing. We collect only what is needed to respond to your inquiry.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.privacy.title"
+    subtitleKey="pageHeader.privacy.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <p><strong>Last updated:</strong> {updated}</p>
+
+    <h2><span class="num">01</span>Who we are</h2>
+    <p>
+      Arcanesys is the brand operated by Manuel Wegria / Vincent Romagnoli, an independent
+      sole-trader entity based in the European Union. Contact:
+      <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a>.
+    </p>
+
+    <h2><span class="num">02</span>What we collect, when, and why</h2>
+    <p>This site collects personal data only when you submit the contact form. Specifically:</p>
+    <ul>
+      <li>Name, email, organisation, role: to identify and reply to you</li>
+      <li>Fleet size and regulatory regime: to assess pilot fit</li>
+      <li>Optional free-text problem description: context for the conversation</li>
+    </ul>
+    <p>
+      Legal basis: <strong>your explicit consent</strong> by submitting the form (GDPR
+      Article 6(1)(a)) and our <strong>legitimate interest</strong> in responding (GDPR
+      Article 6(1)(f)).
+    </p>
+
+    <h2><span class="num">03</span>What we don't do</h2>
+    <ul>
+      <li>No analytics scripts. No Google Analytics, no Facebook Pixel, no tracking pixels.</li>
+      <li>No cookies set by us. The site itself uses no cookies.</li>
+      <li>No third-party data sharing. We do not sell, rent, or trade your data.</li>
+      <li>No newsletter signup, no marketing list, no drip campaigns.</li>
+    </ul>
+    <p>
+      Our form processing is hosted on Netlify (a third party). Netlify acts as a data
+      processor. Submitted form fields transit Netlify's infrastructure before reaching us.
+      Netlify is a US-based provider. EU-US data transfers are covered by the EU-US Data
+      Privacy Framework. If this is a regulatory concern for you, email us directly at
+      <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a> instead of using the form.
+    </p>
+
+    <h2><span class="num">04</span>How long we keep it</h2>
+    <ul>
+      <li>Active conversation: until the conversation ends.</li>
+      <li>After conversation ends: 12 months under legitimate interest (follow-up, audit trail), then deletion.</li>
+      <li>If a pilot or commercial relationship begins: data is retained for the duration of that relationship and 5 years after termination, per French commercial accounting obligations.</li>
+    </ul>
+
+    <h2><span class="num">05</span>Your rights (GDPR Articles 15–22)</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Access the data we hold about you</li>
+      <li>Rectify any data that is incorrect</li>
+      <li>Have your data erased (right to be forgotten)</li>
+      <li>Restrict or object to processing</li>
+      <li>Data portability: receive your data in a structured, machine-readable format</li>
+      <li>Withdraw consent at any time</li>
+      <li>File a complaint with the CNIL (France) or your national data protection authority</li>
+    </ul>
+    <p>
+      To exercise any of these rights, email
+      <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a> with the subject
+      "GDPR request". We respond within 30 days.
+    </p>
+
+    <h2><span class="num">06</span>Updates</h2>
+    <p>
+      We will update this page if our practices change. The "Last updated" date at the top
+      reflects the most recent revision. Material changes will be flagged on the home page
+      for at least 30 days.
+    </p>
+  </article>
+
+  <Footer lang={lang} />
+</Layout>

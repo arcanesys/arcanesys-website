@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en';
+const pathname = Astro.url.pathname;
+---
+
+<Layout title="About - Arcanesys" lang={lang} description="Why we built this, why now, what this is not. Independent, EU-based, sovereignty-first by design. Manuel Wegria / Vincent Romagnoli.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.about.title"
+    subtitleKey="pageHeader.about.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+
+    <h2><span class="num">01</span>Why we built this</h2>
+    <p>
+      We managed NixOS fleets for years before we built NixFleet. The four crises listed on
+      the home page are not academic. They were the daily texture of operations: configuration
+      drift on infrastructure we could not prove was identical, sovereignty exposure on cloud
+      control planes we did not control, security bolted on by detection tools we could not
+      reason about, and compliance produced as PDFs by humans rather than as signed evidence
+      by the system.
+    </p>
+    <p>
+      NixFleet is the framework we wanted: the signed-artifact chain end-to-end, magic
+      rollback as a protocol property, compliance as a release gate. The point is not novelty.
+      The point is that each of these properties already exists in the Nix model. We
+      assembled them.
+    </p>
+
+    <h2><span class="num">02</span>Why now</h2>
+    <p>
+      NIS2 transposition deadlines have passed. DORA is applicable to financial entities
+      since January 2025. ANSSI BP-028 v2.0 is the reference for French infrastructure
+      hardening. Operators under these regimes need declarative tooling that produces signed
+      evidence as a side effect of normal operation, not a separate compliance project
+      layered on top of an imperative stack.
+    </p>
+
+    <h2><span class="num">03</span>What this is not</h2>
+    <ul>
+      <li><strong>Not a startup story.</strong> No funding round, no valuation, no IPO trajectory. The open core funds itself through Pro and Enterprise tiers. The surplus funds open-source work.</li>
+      <li><strong>Not AI-anything.</strong> NixFleet is a systems framework. The trust model relies on cryptographic primitives, not on probabilistic inference.</li>
+      <li><strong>Not VC-backed.</strong> Independent, EU-based, sovereignty-first by design and by economics.</li>
+      <li><strong>Not pretending to be 50 people.</strong> Founder plus ecosystem. The framework benefits from the broader NixOS community. Commercial work is delivered by a small core.</li>
+    </ul>
+
+    <h2><span class="num">04</span>Founders</h2>
+    <ul>
+      <li><strong>Vincent Romagnoli</strong> — pilots, partnerships, public-facing outreach.</li>
+      <li><strong>Manuel Wegria</strong> — architecture, release engineering.</li>
+    </ul>
+    <p>
+      Pilot enquiries: <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a>.
+      Security reports: <a href="mailto:security@arcanesys.fr">security@arcanesys.fr</a>.
+    </p>
+
+    <h2><span class="num">05</span>Where to find the code</h2>
+    <ul>
+      <li><a href="https://github.com/arcanesys/nixfleet">arcanesys/nixfleet</a>: framework, agent, control plane, CLI, CI</li>
+      <li><a href="https://github.com/arcanesys/nixfleet-compliance">arcanesys/nixfleet-compliance</a>: 16 controls + governance engine</li>
+      <li><a href="https://github.com/arcanesys/nixfleet-demo">arcanesys/nixfleet-demo</a>: 4-VM reference fleet</li>
+    </ul>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/contact/`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        Open a conversation →
+      </a>
+    </p>
+  </article>
+
+  <CtaSection lang={lang} />
+  <Footer lang={lang} />
+</Layout>
