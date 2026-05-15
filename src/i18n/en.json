@@ -15,6 +15,8 @@
     "headline1": "Signed GitOps fleet management",
     "headline2": "for NixOS",
     "subtitle": "Declarative, signed, sovereign. Built for EU operators under NIS2, DORA, ISO 27001, and ANSSI BP-028.",
+    "command": "nix run github:arcanesys/nixfleet-demo",
+    "command_caption": "Single-host signed-evidence demo. Requires Nix with flakes enabled and /dev/kvm. macOS: see docs.",
     "cta_primary": "Book a 15-min call",
     "cta_secondary": "Try the demo"
   },
