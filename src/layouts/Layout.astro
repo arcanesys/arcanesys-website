@@ -1,0 +1,62 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  lang: string;
+  description?: string;
+}
+
+const defaultDesc = {
+  en: 'Signed GitOps fleet management for NixOS. NIS2-ready, sovereign, open source.',
+  fr: 'Gestion de flotte NixOS signée par construction. NIS2, souverain, open source.',
+};
+
+const { title, lang, description } = Astro.props;
+const desc = description ?? defaultDesc[lang as 'en' | 'fr'] ?? defaultDesc.en;
+
+const pathname = Astro.url.pathname;
+const canonical = new URL(pathname, 'https://arcanesys.fr').toString();
+
+// Alternate locale URL (swap /en/ ↔ /fr/, preserving the rest of the path).
+const otherLang = lang === 'fr' ? 'en' : 'fr';
+const otherPath = pathname.replace(/^\/(en|fr)/, `/${otherLang}`) || `/${otherLang}/`;
+const otherUrl = new URL(otherPath, 'https://arcanesys.fr').toString();
+
+// Search engines treat x-default as the fallback when no language matches; we point it at EN.
+const xDefaultPath = pathname.replace(/^\/(en|fr)/, '/en');
+const xDefaultUrl = new URL(xDefaultPath, 'https://arcanesys.fr').toString();
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={desc} />
+  <link rel="canonical" href={canonical} />
+
+  <link rel="alternate" hreflang={lang} href={canonical} />
+  <link rel="alternate" hreflang={otherLang} href={otherUrl} />
+  <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
+
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={desc} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+  <meta property="og:locale:alternate" content={lang === 'fr' ? 'en_US' : 'fr_FR'} />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={desc} />
+
+  <title>{title}</title>
+  <link rel="preload" href="/fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/lora-variable.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin />
+</head>
+<body>
+  <slot />
+</body>
+</html>

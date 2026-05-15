@@ -1,0 +1,62 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Footer from '../../../components/Footer.astro';
+
+const lang = 'fr';
+const pathname = Astro.url.pathname;
+---
+
+<Layout title="Cartographie ANSSI BP-028 v2.0 - Arcanesys" lang={lang} description="Cartographie des recommandations ANSSI BP-028 v2.0 contre les 16 contrôles typés de nixfleet-compliance.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.complianceAnssi.title"
+    subtitleKey="pageHeader.complianceAnssi.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <p>
+      ANSSI BP-028 v2.0 (février 2024) est la référence française pour le hardening des
+      infrastructures, avec quatre niveaux (<code>minimal</code> / <code>intermediary</code> /
+      <code>reinforced</code> / <code>high</code>) à travers trois catégories d'hôtes
+      (<code>base</code> / <code>client</code> / <code>server</code>). Les recommandations
+      ci-dessous portent le hardening au niveau noyau et au niveau audit que
+      <a href="https://github.com/arcanesys/nixfleet-compliance"><code>nixfleet-compliance</code></a>
+      applique par contrôle.
+    </p>
+
+    <table>
+      <thead><tr><th>Reco.</th><th>Titre</th><th>Contrôles</th></tr></thead>
+      <tbody>
+        <tr><td>R7</td><td>Activation de l'IOMMU</td><td><code>_baseline-hardening</code> (BH-01)</td></tr>
+        <tr><td>R8</td><td>Hardening mémoire</td><td><code>_baseline-hardening</code> (BH-02)</td></tr>
+        <tr><td>R9</td><td>Options du noyau</td><td><code>_baseline-hardening</code> (BH-03)</td></tr>
+        <tr><td>R10</td><td>Désactivation chargement modules noyau</td><td><code>_baseline-hardening</code> (BH-04)</td></tr>
+        <tr><td>R11</td><td>Yama LSM</td><td><code>_baseline-hardening</code> (BH-05)</td></tr>
+        <tr><td>R12</td><td>Hardening IPv4</td><td><code>_baseline-hardening</code> (BH-06)</td></tr>
+        <tr><td>R13</td><td>Désactivation IPv6</td><td><code>_baseline-hardening</code> (BH-07)</td></tr>
+        <tr><td>R14</td><td>Hardening système de fichiers</td><td><code>_baseline-hardening</code> (BH-08)</td></tr>
+        <tr><td>R33</td><td>Application d'auditd</td><td><code>_audit-logging</code> (AL-02)</td></tr>
+      </tbody>
+    </table>
+
+    <p class="text-[0.88em] text-muted">
+      Le preset ANSSI active aussi <code>_access-control</code>, <code>_encryption-at-rest</code>,
+      <code>_authentication</code>, <code>_secure-boot</code>, et <code>_network-segmentation</code>
+      (catégorie serveur) comme contrôles de hardening additionnels sans R-numéro spécifique.
+    </p>
+
+    <p class="text-[0.88em] text-muted">
+      Source canonique : <a href="https://github.com/arcanesys/nixfleet-compliance/blob/main/docs/anssi-mapping.md">docs/anssi-mapping.md</a> dans le repo de conformité.
+    </p>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/compliance/`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        ← Retour à conformité
+      </a>
+    </p>
+  </article>
+
+  <Footer lang={lang} />
+</Layout>

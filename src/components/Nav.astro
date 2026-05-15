@@ -1,0 +1,49 @@
+---
+import { t } from '../i18n/utils';
+
+interface Props {
+  lang: string;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const otherLang = lang === 'en' ? 'fr' : 'en';
+const otherPath = pathname.replace(/^\/(en|fr)/, `/${otherLang}`) || `/${otherLang}/`;
+
+const navItems = [
+  { key: 'product', href: `/${lang}/product/` },
+  { key: 'compliance', href: `/${lang}/compliance/` },
+  { key: 'vision', href: `/${lang}/vision/` },
+  { key: 'pilot', href: `/${lang}/pilot/` },
+];
+
+const isActive = (href: string) => {
+  const clean = href.replace(/\/$/, '');
+  return pathname === href || pathname === clean || pathname.startsWith(clean + '/');
+};
+---
+
+<nav class="relative flex justify-between items-center max-w-content mx-auto px-10 py-5 flex-wrap gap-y-3">
+  <a href={`/${lang}/`} class="font-mono text-[13px] tracking-[3px] text-paper/70 no-underline hover:text-paper/90 transition-colors">
+    ARCANE<span class="text-indigo">SYS</span>
+  </a>
+  <div class="flex gap-7 items-center font-body text-sm text-paper/60 flex-wrap">
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class:list={['transition-colors no-underline', isActive(item.href) ? 'text-paper' : 'hover:text-paper/90']}
+      >
+        {t(lang, `nav.${item.key}`)}
+      </a>
+    ))}
+    <a href="https://github.com/arcanesys/nixfleet" target="_blank" rel="noopener" class="hover:text-paper/90 transition-colors no-underline">
+      {t(lang, 'nav.github')} ↗
+    </a>
+    <a href={otherPath} class="hover:text-paper/90 transition-colors uppercase font-mono text-[11px] tracking-[1px] no-underline">
+      {otherLang.toUpperCase()}
+    </a>
+    <a href={`/${lang}/contact/`} class="text-paper bg-indigo px-4 py-1.5 rounded font-mono text-[11px] tracking-[1px] hover:bg-indigo-hover transition-colors no-underline">
+      {t(lang, 'nav.contact')}
+    </a>
+  </div>
+</nav>

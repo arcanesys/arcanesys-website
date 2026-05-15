@@ -1,0 +1,99 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'fr';
+const pathname = Astro.url.pathname;
+---
+
+<Layout title="Démo - 4 VMs, 10 minutes, en local - Arcanesys" lang={lang} description="Une flotte de référence à 4 VMs qui exécute toute la boucle GitOps signée sur votre poste. Topologie, ce qu'elle démontre, prérequis. Le walkthrough exécutable vit dans le README du dépôt démo.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.demo.title"
+    subtitleKey="pageHeader.demo.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+
+    <h2><span class="num">01</span>La flotte de référence à 4 VMs</h2>
+    <p>
+      <code>nixfleet-demo</code> démarre quatre VMs QEMU qui exercent toute la boucle GitOps
+      signée : <code>forge</code> (forge Git + runner CI + cache binaire Nix ; le signataire
+      release ed25519 vit ici), <code>cp</code> (control plane, mTLS, vérification de
+      signatures), <code>web-01</code> et <code>web-02</code> (agents nginx sur les canaux
+      stable-canary et edge). Le dépôt embarque des clés démo publiques pour qu'un clone
+      fraîchement récupéré démarre immédiatement - ne déployez pas cette configuration en
+      production.
+    </p>
+    <p>
+      Après le walkthrough en 10 étapes, <code>nixfleet status</code> sur <code>cp</code>
+      montre la flotte en convergence :
+    </p>
+    <pre class="font-mono text-[0.8em] bg-dark text-paper p-5 rounded overflow-x-auto leading-relaxed"><code>root@cp:~# nixfleet status
+HOST    CHANNEL  CURRENT         DECLARED        STATUS       COMPLIANCE
+forge   stable   q9w4kx2vp3nf7…  q9w4kx2vp3nf7…  ✓ converged  -
+cp      stable   8jzm5lc7wxqr2…  8jzm5lc7wxqr2…  ✓ converged  0 outstanding
+web-01  stable   yb3dr0h5p9fnt…  yb3dr0h5p9fnt…  ✓ converged  0 outstanding
+web-02  edge     m7c4kx9l1bgwh…  m7c4kx9l1bgwh…  ✓ converged  0 outstanding</code></pre>
+    <p>
+      <code>forge</code> affiche <code>-</code> dans la colonne compliance parce qu'il s'agit
+      de l'hôte de build / signature, pas d'un workload audité. Les trois agents utilisent le
+      preset NIS2.
+    </p>
+    <p>
+      <a href="https://github.com/arcanesys/nixfleet-demo">github.com/arcanesys/nixfleet-demo</a>
+      &nbsp;·&nbsp; MIT.
+    </p>
+
+    <h2><span class="num">02</span>Ce que la démo démontre</h2>
+    <ul>
+      <li><strong>Toute la boucle GitOps à artefacts signés</strong> : commit sur votre poste → CI dans <code>forge</code> signe <code>fleet.resolved.json</code> → <code>cp</code> vérifie → chaque agent vérifie indépendamment → activation.</li>
+      <li><strong>Vagues gating canal</strong> : <code>web-02</code> (edge) doit converger avant que <code>web-01</code> (stable canary) ne puisse démarrer. L'ordonnancement <code>channelEdges</code> est la porte.</li>
+      <li><strong>Rollback magique à deadline</strong> : cassez la config de <code>web-01</code>, poussez. L'agent échoue l'activation et revient automatiquement à la génération précédente. Pas de monitoring externe.</li>
+      <li><strong>Vérification indépendante de l'agent</strong> : arrêtez <code>cp</code> entre la signature et le dispatch. Les agents refusent tout ce qui n'est pas signé par la clé release.</li>
+      <li><strong>Preuves de conformité signées</strong> : <code>/var/lib/nixfleet-compliance/evidence.json</code> sur chaque agent, canonicalisé JCS, signé par l'hôte, par contrôle.</li>
+    </ul>
+
+    <h2><span class="num">03</span>Prérequis</h2>
+    <ul>
+      <li>Linux ou macOS avec Nix flakes activé (<code>experimental-features = nix-command flakes</code>)</li>
+      <li>QEMU/KVM (Linux) ou Apple Hypervisor (macOS)</li>
+      <li>~6&nbsp;Go RAM libre, ~20&nbsp;Go disque libre pour l'état des VMs</li>
+      <li><strong>Premier run CI : 20–45 minutes</strong> sur un cache nixpkgs froid (forge compile le workspace Rust nixfleet depuis la source). Les pushes suivants finissent en 2–5 minutes.</li>
+    </ul>
+
+    <h2><span class="num">04</span>Exécuter la démo</h2>
+    <p>
+      Le walkthrough en 10 étapes - commandes exactes, flags, redirections de ports, sorties
+      attendues - vit dans le README du dépôt. Copier-coller, dix minutes de saisie, puis une
+      pause café pour le premier run CI. Le README est la source de vérité unique. Les
+      commandes évoluent avec le flake.
+    </p>
+    <p class="text-center mt-8">
+      <a href="https://github.com/arcanesys/nixfleet-demo#10-step-walkthrough" class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded bg-indigo text-paper hover:bg-indigo-hover hover:-translate-y-px transition-all inline-block no-underline mr-3">
+        Ouvrir le walkthrough ↗
+      </a>
+      <a href="https://github.com/arcanesys/nixfleet-demo" class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded border border-paper-3 text-ink hover:bg-paper-2 transition-all inline-block no-underline">
+        Ouvrir le dépôt ↗
+      </a>
+    </p>
+    <h2><span class="num">05</span>Après la démo</h2>
+    <p>
+      Si la boucle a convergé sur votre poste, l'étape suivante est un appel de 15 min pour
+      cadrer un atelier sur 2–3 de vos hôtes. La transition de la démo vers votre
+      infrastructure est documentée dans le kit atelier.
+    </p>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/contact/?topic=workshop`} class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded bg-indigo text-paper hover:bg-indigo-hover hover:-translate-y-px transition-all inline-block no-underline">
+        Cadrer un atelier →
+      </a>
+    </p>
+  </article>
+
+  <CtaSection lang={lang} />
+  <Footer lang={lang} />
+</Layout>

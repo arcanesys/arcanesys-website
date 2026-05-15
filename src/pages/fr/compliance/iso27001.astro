@@ -1,0 +1,57 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Footer from '../../../components/Footer.astro';
+
+const lang = 'fr';
+const pathname = Astro.url.pathname;
+---
+
+<Layout title="Cartographie ISO 27001:2022 Annexe A - Arcanesys" lang={lang} description="Cartographie des contrôles Annexe A de l'ISO/IEC 27001:2022 contre les 16 contrôles typés de nixfleet-compliance.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.complianceIso27001.title"
+    subtitleKey="pageHeader.complianceIso27001.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <p>
+      L'Annexe A d'ISO/IEC 27001:2022 est la référence de certification transversale. Les
+      contrôles Annexe A couverts par
+      <a href="https://github.com/arcanesys/nixfleet-compliance"><code>nixfleet-compliance</code></a>
+      relèvent des clauses A.5 (organisationnel) et A.8 (technologique).
+    </p>
+
+    <table>
+      <thead><tr><th>Annexe A</th><th>Titre</th><th>Contrôles</th></tr></thead>
+      <tbody>
+        <tr><td>A.5.9</td><td>Inventaire des actifs</td><td><code>_asset-inventory</code></td></tr>
+        <tr><td>A.5.19, A.5.21</td><td>Relations fournisseurs / chaîne d'approvisionnement</td><td><code>_supply-chain</code></td></tr>
+        <tr><td>A.5.24, A.5.26</td><td>Gestion d'incidents</td><td><code>_incident-response</code></td></tr>
+        <tr><td>A.5.29, A.5.30</td><td>Continuité / préparation ICT</td><td><code>_disaster-recovery</code></td></tr>
+        <tr><td>A.8.2, A.8.3</td><td>Accès privilégié / restriction d'accès</td><td><code>_access-control</code></td></tr>
+        <tr><td>A.8.5</td><td>Authentification sécurisée</td><td><code>_authentication</code></td></tr>
+        <tr><td>A.8.8</td><td>Gestion des vulnérabilités techniques</td><td><code>_vulnerability-mgmt</code>, <code>_baseline-hardening</code></td></tr>
+        <tr><td>A.8.9</td><td>Gestion de configuration</td><td><code>_baseline-hardening</code></td></tr>
+        <tr><td>A.8.13</td><td>Sauvegarde de l'information</td><td><code>_backup-retention</code></td></tr>
+        <tr><td>A.8.15, A.8.16</td><td>Journalisation / monitoring</td><td><code>_audit-logging</code></td></tr>
+        <tr><td>A.8.20, A.8.24</td><td>Sécurité réseau / cryptographie</td><td><code>_encryption-in-transit</code></td></tr>
+        <tr><td>A.8.24</td><td>Usage de la cryptographie</td><td><code>_encryption-at-rest</code>, <code>_key-management</code></td></tr>
+        <tr><td>A.8.32</td><td>Gestion du changement</td><td><code>_change-management</code></td></tr>
+      </tbody>
+    </table>
+
+    <p class="text-[0.88em] text-muted">
+      Source canonique : <a href="https://github.com/arcanesys/nixfleet-compliance/blob/main/docs/iso27001-mapping.md">docs/iso27001-mapping.md</a> dans le repo de conformité.
+    </p>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/compliance/`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        ← Retour à conformité
+      </a>
+    </p>
+  </article>
+
+  <Footer lang={lang} />
+</Layout>

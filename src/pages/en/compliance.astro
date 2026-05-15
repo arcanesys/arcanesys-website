@@ -1,0 +1,172 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en';
+const pathname = Astro.url.pathname;
+---
+
+<Layout title="Compliance - 16 controls, 4 frameworks - Arcanesys" lang={lang} description="16 typed controls across NIS2, DORA, ISO 27001, ANSSI BP-028. Article-by-article mapping. Signed JSON evidence per host, auditor-verifiable offline.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.compliance.title"
+    subtitleKey="pageHeader.compliance.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <h2><span class="num">01</span>Compliance as a release gate, not a scanner</h2>
+    <p>
+      <code>nixfleet-compliance</code> ships 16 typed control modules across 4 frameworks. Each
+      control follows the <strong>enforce + prove</strong> pattern: <code>enforce</code> applies
+      the control (sysctl, firewall rule, SSH policy). <code>prove</code> emits structured JSON
+      evidence to <code>/var/lib/nixfleet-compliance/evidence.json</code>. A systemd timer runs
+      the collector hourly for essential entities and daily for important entities.
+    </p>
+    <p>
+      The compliance layer has no runtime dependency on nixfleet itself. It detects nixfleet
+      features at evaluation time using <code>options ?</code> checks, so it works with or
+      without the agent or control plane. Repository:
+      <a href="https://github.com/arcanesys/nixfleet-compliance">arcanesys/nixfleet-compliance</a> (MIT).
+    </p>
+
+    <h2><span class="num">02</span>The 16 controls</h2>
+    <p>
+      Each typed control declares which article it satisfies per framework. The matrix below
+      is the cross-cutting view; the per-framework detail lives in §03.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Control</th>
+          <th>NIS2 Art. 21</th>
+          <th>ISO 27001 Annex A</th>
+          <th>DORA Art.</th>
+          <th>ANSSI BP-028</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>_access-control</code></td><td>21(i)</td><td>A.8.2, A.8.3</td><td>Art. 9</td><td>preset</td></tr>
+        <tr><td><code>_asset-inventory</code></td><td>21(i)</td><td>A.5.9</td><td>Art. 8</td><td>-</td></tr>
+        <tr><td><code>_audit-logging</code></td><td>21(f)</td><td>A.8.15, A.8.16</td><td>-</td><td>R33</td></tr>
+        <tr><td><code>_authentication</code></td><td>21(j)</td><td>A.8.5</td><td>Art. 9</td><td>preset</td></tr>
+        <tr><td><code>_backup-retention</code></td><td>21(c)</td><td>A.8.13</td><td>Art. 12</td><td>-</td></tr>
+        <tr><td><code>_baseline-hardening</code></td><td>21(a), 21(g)</td><td>A.8.8, A.8.9</td><td>-</td><td>R7–R14</td></tr>
+        <tr><td><code>_change-management</code></td><td>21(e)</td><td>A.8.32</td><td>Art. 8</td><td>-</td></tr>
+        <tr><td><code>_disaster-recovery</code></td><td>21(c)</td><td>A.5.29, A.5.30</td><td>Art. 12</td><td>-</td></tr>
+        <tr><td><code>_encryption-at-rest</code></td><td>21(h)</td><td>A.8.24</td><td>-</td><td>preset</td></tr>
+        <tr><td><code>_encryption-in-transit</code></td><td>21(h)</td><td>A.8.20, A.8.24</td><td>-</td><td>-</td></tr>
+        <tr><td><code>_incident-response</code></td><td>21(b)</td><td>A.5.24, A.5.26</td><td>Art. 17</td><td>-</td></tr>
+        <tr><td><code>_key-management</code></td><td>21(h)</td><td>A.8.24</td><td>-</td><td>-</td></tr>
+        <tr><td><code>_network-segmentation</code></td><td>21(a)</td><td>-</td><td>Art. 9</td><td>preset</td></tr>
+        <tr><td><code>_secure-boot</code></td><td>21(a)</td><td>-</td><td>-</td><td>preset</td></tr>
+        <tr><td><code>_supply-chain</code></td><td>21(d)</td><td>A.5.19, A.5.21</td><td>-</td><td>-</td></tr>
+        <tr><td><code>_vulnerability-mgmt</code></td><td>21(e)</td><td>A.8.8</td><td>Art. 8</td><td>-</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">03</span>Framework coverage</h2>
+    <p>
+      The same 16 controls satisfy four framework presets through different article-level
+      mappings. Coverage: <strong>10 / 10 NIS2 Article 21 sub-articles, ISO 27001:2022 Annex A
+      across A.5 and A.8, DORA Articles 8 / 9 / 12 / 17, ANSSI BP-028 R7–R14 + R33.</strong>
+      Each framework's article-by-article table is its own page:
+    </p>
+    <ul>
+      <li><a href={`/${lang}/compliance/nis2/`}>NIS2 — Article 21 mapping</a> (10 sub-articles)</li>
+      <li><a href={`/${lang}/compliance/dora/`}>DORA — Chapter III mapping</a> (Articles 8, 9, 12, 17)</li>
+      <li><a href={`/${lang}/compliance/iso27001/`}>ISO 27001:2022 — Annex A mapping</a> (A.5 + A.8 controls)</li>
+      <li><a href={`/${lang}/compliance/anssi/`}>ANSSI BP-028 v2.0 — mapping</a> (R7–R14 + R33, four hardening levels)</li>
+      <li><a href={`/${lang}/compliance/nis2-entity-classification/`}>NIS2 entity classification</a> (essential vs. important thresholds across the fleet)</li>
+    </ul>
+    <p class="text-[0.88em] text-muted">
+      <strong>Additional article-level coverage</strong> (no full preset yet):
+      <strong>CRA</strong> (EU Cyber Resilience Act) Art. 10 on <code>_supply-chain</code>,
+      <code>_encryption-in-transit</code>, <code>_secure-boot</code>, and Art. 11 on
+      <code>_vulnerability-mgmt</code>. <strong>SecNumCloud</strong> on
+      <code>_key-management</code>, <code>_network-segmentation</code>, <code>_secure-boot</code>.
+    </p>
+
+    <h2><span class="num">04</span>Evidence format - JCS-signed JSON</h2>
+    <p>
+      The collector writes three files to <code>/var/lib/nixfleet-compliance/</code>:
+      <code>evidence.json</code> (the record), <code>evidence.json.sig</code> (a base64 ed25519
+      signature over the JCS-canonical bytes of the record, RFC&nbsp;8785), and
+      <code>evidence.host.pub</code> (the host's SSH ed25519 public key, published alongside).
+      An auditor with the three files runs <code>nixfleet-compliance-verify</code> to
+      reproduce the canonicalisation and check the signature: no control plane, no operator
+      trust, no scanner-vendor trust. Sample record from the <code>_supply-chain</code>
+      control:
+    </p>
+    <pre class="font-mono text-[0.8em] bg-paper-2 p-4 rounded overflow-x-auto"><code>{`{
+  "host": "water-plant-01",
+  "timestamp": "2026-04-05T10:00:00Z",
+  "controls": [
+    {
+      "control": "supply-chain",
+      "status": "compliant",
+      "framework_articles": {
+        "nis2":      ["21(d)"],
+        "iso27001":  ["A.5.19", "A.5.21"],
+        "cra":       ["Art. 10"]
+      },
+      "checks": {
+        "has_configuration_revision": true,
+        "sbom_generated": true,
+        "closure_package_count": 847,
+        "inputs_fresh": true
+      }
+    }
+  ],
+  "overall": "16/16 controls compliant"
+}`}</code></pre>
+    <p>
+      <strong>Key design decision:</strong> <code>framework_articles</code> links each control
+      to the articles it satisfies. <code>checks</code> contains the raw probe output, not a
+      summary - auditors verify each individual assertion. The control-level <code>status</code>
+      is derived from <code>checks</code>. It is not asserted by configuration.
+    </p>
+
+    <h2><span class="num">05</span>Two enforcement modes</h2>
+    <ul>
+      <li>
+        <strong>Static gates:</strong> the build fails before a non-compliant closure can ship.
+        No runtime detection needed - the closure that ships is provably compliant by
+        construction.
+      </li>
+      <li>
+        <strong>Runtime probes:</strong> gate wave promotion and trigger agent rollback on probe
+        failure. The CP refuses to advance a wave if any compliance probe failed in the prior
+        wave.
+      </li>
+    </ul>
+
+    <h2><span class="num">06</span>Governance engine</h2>
+    <p>
+      Per-rule exceptions with rationale tracking. Operators set
+      <code>compliance.controls.&lt;name&gt;.enforce = false</code> and document the exception
+      inline. Three modes: <code>enforce</code>, <code>permissive</code> (warn-only),
+      <code>disabled</code>. The mode and host type (server, workstation, endpoint) drive
+      sensible defaults per control.
+    </p>
+
+    <h2><span class="num">07</span>Compliance-check CLI</h2>
+    <p>
+      <code>compliance-check</code> reads
+      <code>/var/lib/nixfleet-compliance/evidence.json</code> and prints coloured pass/fail per
+      control. <code>--live</code> re-runs each probe inline (useful in CI or before an audit).
+      Output is also available as JSON for scripting.
+    </p>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/pilot/`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        Walk through the compliance flow - 15 min →
+      </a>
+    </p>
+  </article>
+
+  <CtaSection lang={lang} />
+  <Footer lang={lang} />
+</Layout>
