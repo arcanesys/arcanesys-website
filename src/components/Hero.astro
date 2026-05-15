@@ -28,6 +28,13 @@ const { lang, pathname } = Astro.props;
       {t(lang, 'hero.subtitle')}
     </p>
 
+    <div class="mt-7 max-w-[560px] mx-auto">
+      <pre class="font-mono text-[13px] text-paper bg-black/40 border border-paper/20 rounded px-5 py-3 text-left overflow-x-auto m-0"><code>{t(lang, 'hero.command')}</code></pre>
+      <p class="font-body text-[12px] text-paper/45 mt-2 leading-snug">
+        {t(lang, 'hero.command_caption')}
+      </p>
+    </div>
+
     <div class="mt-8 flex gap-3.5 justify-center flex-wrap">
       <a href={`/${lang}/contact/`} class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded bg-indigo text-paper hover:bg-indigo-hover hover:-translate-y-px transition-all no-underline">
         {t(lang, 'hero.cta_primary')}

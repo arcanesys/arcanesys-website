@@ -15,6 +15,8 @@
     "headline1": "Gestion de flotte NixOS",
     "headline2": "en GitOps signé",
     "subtitle": "Déclaratif, signé, souverain. Conçu pour les opérateurs européens sous NIS2, DORA, ISO 27001 et ANSSI BP-028.",
+    "command": "nix run github:arcanesys/nixfleet-demo",
+    "command_caption": "Démo monohôte avec preuves signées. Nécessite Nix avec les flakes activés et /dev/kvm. macOS : voir la doc.",
     "cta_primary": "Réserver un appel de 15 min",
     "cta_secondary": "Essayer la démo"
   },
