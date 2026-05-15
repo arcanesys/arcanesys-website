@@ -80,21 +80,24 @@ const crises = [
   </section>
 
   <section class="max-w-content mx-auto px-10 py-14">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <a href={`/${lang}/compliance/`} class="block bg-paper-2 border border-paper-3 p-6 no-underline hover:border-indigo transition-colors">
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_1.25fr_1fr] gap-6 items-stretch">
+      <a href={`/${lang}/compliance/`} class="group relative block bg-paper-2 border-2 border-paper-3 border-t-[4px] border-t-emerald p-6 pb-12 no-underline transition-all duration-200 hover:-translate-y-1 hover:border-emerald hover:bg-paper hover:shadow-xl">
         <div class="font-mono text-xs tracking-[3px] text-emerald uppercase mb-2">Conformité</div>
         <h3 class="font-display text-base font-bold text-ink mb-2">16 contrôles · 4 référentiels</h3>
         <p class="text-[0.88em] text-muted leading-relaxed">Cartographie NIS2 Article 21, preuves signées par hôte, moteur de gouvernance avec exceptions par règle.</p>
+        <span class="absolute bottom-4 right-5 font-mono text-emerald opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200" aria-hidden="true">→</span>
       </a>
-      <a href={`/${lang}/vision/`} class="block bg-paper-2 border border-paper-3 p-6 no-underline hover:border-indigo transition-colors">
+      <a href={`/${lang}/pilot/`} class="group relative block bg-paper-2 border-2 border-rose/40 border-t-[4px] border-t-rose p-6 md:p-8 pb-12 md:pb-14 no-underline transition-all duration-200 hover:-translate-y-1 hover:border-rose hover:bg-paper hover:shadow-2xl">
+        <div class="font-mono text-xs tracking-[3px] text-rose uppercase mb-2">Pilote</div>
+        <h3 class="font-display text-lg font-bold text-ink mb-2">3 mois · 5 à 15 machines · sans frais</h3>
+        <p class="text-[0.92em] text-muted leading-relaxed">Votre zone réglementée sur un substrat déclaratif. Paquet de preuves NIS2 signé à 3 mois. Migration depuis Ansible / Puppet / Chef incluse.</p>
+        <span class="absolute bottom-4 right-5 font-mono text-rose opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200" aria-hidden="true">→</span>
+      </a>
+      <a href={`/${lang}/vision/`} class="group relative block bg-paper-2 border-2 border-paper-3 border-t-[4px] border-t-amber p-6 pb-12 no-underline transition-all duration-200 hover:-translate-y-1 hover:border-amber hover:bg-paper hover:shadow-xl">
         <div class="font-mono text-xs tracking-[3px] text-amber uppercase mb-2">Vision</div>
         <h3 class="font-display text-base font-bold text-ink mb-2">Citoyenneté cryptographique</h3>
         <p class="text-[0.88em] text-muted leading-relaxed">Identité ancrée TPM, secrets scellés PCR, canaux signés à seuil. Spécifié en 4 RFCs.</p>
-      </a>
-      <a href={`/${lang}/pilot/`} class="block bg-paper-2 border border-paper-3 p-6 no-underline hover:border-indigo transition-colors">
-        <div class="font-mono text-xs tracking-[3px] text-rose uppercase mb-2">Pilote</div>
-        <h3 class="font-display text-base font-bold text-ink mb-2">3 mois · 5 à 15 machines · sans frais</h3>
-        <p class="text-[0.88em] text-muted leading-relaxed">Votre zone réglementée sur un substrat déclaratif. Paquet de preuves NIS2 signé à 3 mois. Migration depuis Ansible / Puppet / Chef incluse.</p>
+        <span class="absolute bottom-4 right-5 font-mono text-amber opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200" aria-hidden="true">→</span>
       </a>
     </div>
   </section>
