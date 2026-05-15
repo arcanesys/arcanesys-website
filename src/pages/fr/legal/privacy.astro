@@ -1,0 +1,91 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Footer from '../../../components/Footer.astro';
+
+const lang = 'fr';
+const pathname = Astro.url.pathname;
+const updated = '2026-05-14';
+---
+
+<Layout title="Confidentialité - Arcanesys" lang={lang} description="Politique de confidentialité RGPD a minima. Pas d'analytics, pas de tracking, pas de partage tiers. Nous ne collectons que ce qui est nécessaire pour répondre.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.privacy.title"
+    subtitleKey="pageHeader.privacy.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <p><strong>Dernière mise à jour :</strong> {updated}</p>
+
+    <h2><span class="num">01</span>Qui nous sommes</h2>
+    <p>
+      Arcanesys est la marque exploitée par Manuel Wegria / Vincent Romagnoli, entité
+      indépendante basée dans l'Union européenne. Contact :
+      <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a>.
+    </p>
+
+    <h2><span class="num">02</span>Ce que nous collectons, quand et pourquoi</h2>
+    <p>Ce site collecte des données personnelles uniquement lorsque vous soumettez le formulaire de contact. À savoir :</p>
+    <ul>
+      <li>Nom, email, organisation, rôle : pour vous identifier et vous répondre</li>
+      <li>Taille de flotte et régime réglementaire : pour évaluer la pertinence d'un pilote</li>
+      <li>Description libre du problème (facultative) : contexte pour l'échange</li>
+    </ul>
+    <p>
+      Base légale : <strong>votre consentement explicite</strong> en soumettant le formulaire
+      (RGPD Article 6(1)(a)) et notre <strong>intérêt légitime</strong> à répondre (RGPD
+      Article 6(1)(f)).
+    </p>
+
+    <h2><span class="num">03</span>Ce que nous ne faisons pas</h2>
+    <ul>
+      <li>Aucun script d'analytics. Pas de Google Analytics, pas de Facebook Pixel, pas de pixels de tracking.</li>
+      <li>Aucun cookie déposé par nous. Le site lui-même n'utilise pas de cookies.</li>
+      <li>Aucun partage avec des tiers. Nous ne vendons, louons, ni n'échangeons vos données.</li>
+      <li>Pas d'inscription newsletter, pas de liste marketing, pas de campagnes d'emailing.</li>
+    </ul>
+    <p>
+      Notre traitement de formulaire est hébergé chez Netlify (tiers). Netlify agit comme
+      sous-traitant. Les champs soumis transitent par l'infrastructure Netlify avant de nous
+      parvenir. Netlify est un fournisseur basé aux US. Les transferts UE-US sont couverts
+      par l'EU-US Data Privacy Framework. Si cela représente une contrainte réglementaire
+      pour vous, écrivez-nous directement à
+      <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a> plutôt que d'utiliser le formulaire.
+    </p>
+
+    <h2><span class="num">04</span>Durées de conservation</h2>
+    <ul>
+      <li>Conversation active : jusqu'à la fin de la conversation.</li>
+      <li>Après fin de conversation : 12 mois au titre de l'intérêt légitime (suivi, traçabilité), puis suppression.</li>
+      <li>Si un pilote ou une relation commerciale démarre : données conservées pour la durée de la relation et 5 ans après cessation, conformément aux obligations comptables et commerciales françaises.</li>
+    </ul>
+
+    <h2><span class="num">05</span>Vos droits (RGPD Articles 15–22)</h2>
+    <p>Vous avez le droit de :</p>
+    <ul>
+      <li>Accéder aux données que nous détenons sur vous</li>
+      <li>Rectifier toute donnée erronée</li>
+      <li>Demander l'effacement de vos données (droit à l'oubli)</li>
+      <li>Limiter ou vous opposer au traitement</li>
+      <li>Portabilité : recevoir vos données dans un format structuré, lisible machine</li>
+      <li>Retirer votre consentement à tout moment</li>
+      <li>Déposer une plainte auprès de la CNIL (France) ou de votre autorité nationale de protection des données</li>
+    </ul>
+    <p>
+      Pour exercer l'un de ces droits, écrivez à
+      <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a> avec l'objet « Demande
+      RGPD ». Nous répondons sous 30 jours.
+    </p>
+
+    <h2><span class="num">06</span>Mises à jour</h2>
+    <p>
+      Nous mettrons cette page à jour si nos pratiques évoluent. La date « Dernière mise à
+      jour » en haut reflète la révision la plus récente. Les changements substantiels seront
+      signalés sur la page d'accueil pendant au moins 30 jours.
+    </p>
+  </article>
+
+  <Footer lang={lang} />
+</Layout>

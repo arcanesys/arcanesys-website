@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'fr';
+const pathname = Astro.url.pathname;
+---
+
+<Layout title="À propos - Arcanesys" lang={lang} description="Pourquoi, pourquoi maintenant, ce que ce n'est pas. Indépendant, basé en UE, souveraineté-first par design. Manuel Wegria / Vincent Romagnoli.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.about.title"
+    subtitleKey="pageHeader.about.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+
+    <h2><span class="num">01</span>Pourquoi nous avons construit ceci</h2>
+    <p>
+      Nous opérions des flottes NixOS depuis des années avant de construire NixFleet. Les
+      quatre crises listées sur la page d'accueil ne sont pas académiques. Elles étaient la
+      texture quotidienne des opérations : dérive de configuration sur une infrastructure
+      dont nous ne pouvions pas prouver l'identité, exposition à la souveraineté sur des
+      control planes cloud que nous ne contrôlions pas, sécurité rapportée par des outils de
+      détection sur lesquels nous ne pouvions pas raisonner, et conformité produite en PDF
+      par des humains plutôt qu'en preuves signées par le système.
+    </p>
+    <p>
+      NixFleet est le framework que nous voulions : chaîne d'artefacts signés de bout en
+      bout, rollback magique comme propriété de protocole, conformité comme porte de release.
+      Le but n'est pas la nouveauté. Le but est que chacune de ces propriétés existe déjà
+      dans le modèle Nix. Nous les avons assemblées.
+    </p>
+
+    <h2><span class="num">02</span>Pourquoi maintenant</h2>
+    <p>
+      Les échéances de transposition NIS2 sont passées. DORA est applicable aux entités
+      financières depuis janvier 2025. ANSSI BP-028 v2.0 est la référence pour le hardening
+      des infrastructures françaises. Les opérateurs sous ces régimes ont besoin d'un
+      outillage déclaratif qui produit des preuves signées comme effet de bord du
+      fonctionnement normal, pas un projet conformité séparé empilé par-dessus une pile
+      impérative.
+    </p>
+
+    <h2><span class="num">03</span>Ce que ce n'est pas</h2>
+    <ul>
+      <li><strong>Pas une startup story.</strong> Pas de levée, pas de valorisation, pas de trajectoire IPO. Le cœur open-source se finance par les tiers Pro et Enterprise. Le surplus finance le travail open-source.</li>
+      <li><strong>Pas d'AI-anything.</strong> NixFleet est un framework système. Le modèle de confiance repose sur des primitives cryptographiques, pas sur de l'inférence probabiliste.</li>
+      <li><strong>Pas VC-backed.</strong> Indépendant, basé en UE, souveraineté-first par design et par économie.</li>
+      <li><strong>Pas en train de prétendre être 50 personnes.</strong> Fondateur plus écosystème. Le framework bénéficie de la communauté NixOS au sens large. Le travail commercial est délivré par un petit cœur.</li>
+    </ul>
+
+    <h2><span class="num">04</span>Fondateurs</h2>
+    <ul>
+      <li><strong>Vincent Romagnoli</strong> — pilotes, partenariats, relation publique.</li>
+      <li><strong>Manuel Wegria</strong> — architecture, release engineering.</li>
+    </ul>
+    <p>
+      Demandes pilote : <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a>.
+      Rapports de sécurité : <a href="mailto:security@arcanesys.fr">security@arcanesys.fr</a>.
+    </p>
+
+    <h2><span class="num">05</span>Où trouver le code</h2>
+    <ul>
+      <li><a href="https://github.com/arcanesys/nixfleet">arcanesys/nixfleet</a> : framework, agent, control plane, CLI, CI</li>
+      <li><a href="https://github.com/arcanesys/nixfleet-compliance">arcanesys/nixfleet-compliance</a> : 16 contrôles + moteur de gouvernance</li>
+      <li><a href="https://github.com/arcanesys/nixfleet-demo">arcanesys/nixfleet-demo</a> : flotte de référence à 4 VMs</li>
+    </ul>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/contact/`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        Ouvrir une conversation →
+      </a>
+    </p>
+  </article>
+
+  <CtaSection lang={lang} />
+  <Footer lang={lang} />
+</Layout>

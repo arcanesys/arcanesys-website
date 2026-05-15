@@ -1,0 +1,51 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Footer from '../../../components/Footer.astro';
+
+const lang = 'fr';
+const pathname = Astro.url.pathname;
+---
+
+<Layout title="Cartographie DORA Chapitre III - Arcanesys" lang={lang} description="Cartographie du Règlement DORA 2022/2554 Chapitre III contre les 16 contrôles typés de nixfleet-compliance.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.complianceDora.title"
+    subtitleKey="pageHeader.complianceDora.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <p>
+      DORA (Règlement 2022/2554, applicable depuis le 17 janvier 2025) fixe les exigences
+      de gestion des risques ICT pour les établissements de crédit, entreprises
+      d'investissement, prestataires de services en crypto-actifs et autres entités
+      financières. Les quatre articles du Chapitre III ci-dessous portent le contenu
+      opérationnel sécurité-ICT ;
+      <a href="https://github.com/arcanesys/nixfleet-compliance"><code>nixfleet-compliance</code></a>
+      les couvre via les contrôles nommés.
+    </p>
+
+    <table>
+      <thead><tr><th>Article</th><th>Exigence</th><th>Contrôles</th></tr></thead>
+      <tbody>
+        <tr><td>Art. 8</td><td>Gestion d'actifs ICT &amp; changement / correctifs</td><td><code>_asset-inventory</code>, <code>_change-management</code>, <code>_vulnerability-mgmt</code></td></tr>
+        <tr><td>Art. 9</td><td>Contrôle d'accès ICT, authentification, segmentation réseau</td><td><code>_access-control</code>, <code>_authentication</code>, <code>_network-segmentation</code></td></tr>
+        <tr><td>Art. 12</td><td>Backup &amp; reprise, continuité</td><td><code>_backup-retention</code>, <code>_disaster-recovery</code></td></tr>
+        <tr><td>Art. 17</td><td>Gestion d'incidents ICT</td><td><code>_incident-response</code></td></tr>
+      </tbody>
+    </table>
+
+    <p class="text-[0.88em] text-muted">
+      Source canonique : <a href="https://github.com/arcanesys/nixfleet-compliance/blob/main/docs/dora-mapping.md">docs/dora-mapping.md</a> dans le repo de conformité.
+    </p>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/compliance/`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        ← Retour à conformité
+      </a>
+    </p>
+  </article>
+
+  <Footer lang={lang} />
+</Layout>
