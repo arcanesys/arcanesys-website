@@ -34,7 +34,7 @@ const rfcs = [
   <article class="prose max-w-prose mx-auto px-10 py-12">
 
     <blockquote>
-      <strong>RFC-0004 §1, verbatim :</strong> « Un artefact signé par un hôte est aussi une preuve que l'état de boot mesuré de cet hôte correspond aux attentes déclarées au moment de la signature. »
+      <strong>RFC-0009 §1, verbatim :</strong> « Un artefact signé par un hôte est aussi une preuve que l'état de boot mesuré de cet hôte correspond aux attentes déclarées au moment de la signature. »
     </blockquote>
 
     <h2><span class="num">01</span>La thèse</h2>
@@ -74,10 +74,10 @@ const rfcs = [
     <p>
       Chaque RFC est livrée avec une section de critères falsifiables. Total ~1000 lignes
       réparties sur
-      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0004-hardware-rooted-trust.md">RFC-0004</a>,
-      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0005-trust-lifecycle.md">RFC-0005</a>,
-      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0006-freshness-window-policy.md">RFC-0006</a>,
-      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0007-air-gapped-operation.md">RFC-0007</a>.
+      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0009-hardware-rooted-trust.md">RFC-0009</a>,
+      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0010-trust-lifecycle.md">RFC-0010</a>,
+      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0011-freshness-window-policy.md">RFC-0011</a>,
+      <a href="https://github.com/arcanesys/nixfleet/blob/main/docs/rfcs/0012-air-gapped-operation.md">RFC-0012</a>.
       Ce ne sont pas du langage aspirationnel - ce sont des spécifications qui attendent
       l'effort d'implémentation.
     </p>
@@ -85,7 +85,7 @@ const rfcs = [
     <h2><span class="num">04</span>Ce qui est déjà livré dans cette direction</h2>
     <p>La trajectoire n'est pas greenfield. La fondation est livrée :</p>
     <ul>
-      <li><strong>Abstraction TPM keyslot</strong> (<code>impls/keyslots/tpm/</code>) : génération de clé primaire, éviction de handle persistant, wrappers <code>tpm-sign-&lt;nom&gt;</code>, support de politique PCR, idempotent à travers les wipes d'impermanence. RFC-0004 ne réimplemente <em>pas</em> ceci - elle l'étend avec un binding à l'identité hôte.</li>
+      <li><strong>Abstraction TPM keyslot</strong> (<code>impls/keyslots/tpm/</code>) : génération de clé primaire, éviction de handle persistant, wrappers <code>tpm-sign-&lt;nom&gt;</code>, support de politique PCR, idempotent à travers les wipes d'impermanence. RFC-0009 ne réimplemente <em>pas</em> ceci - elle l'étend avec un binding à l'identité hôte.</li>
       <li><strong>Machinerie de vérification d'artefacts signés</strong> : la même bibliothèque <code>verify-artifact</code> qui vérifie aujourd'hui les signatures release CI vérifiera demain les preuves de boot quoted-TPM sur la même chaîne.</li>
       <li><strong>Slots de rotation trust-root</strong> (<code>current</code> / <code>previous</code> / <code>successor</code> / <code>retireAt</code>) sur chaque racine de confiance déclarée.</li>
       <li><strong>Allowlist bootstrap-token</strong> : application single-use, scoping hostname + pubkey. Le binding fingerprint EK est un champ additif.</li>
