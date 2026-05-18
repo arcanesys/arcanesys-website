@@ -101,32 +101,32 @@ const pathname = Astro.url.pathname;
       control:
     </p>
     <pre class="font-mono text-[0.8em] bg-paper-2 p-4 rounded overflow-x-auto"><code>{`{
-  "host": "water-plant-01",
-  "timestamp": "2026-04-05T10:00:00Z",
+  "schemaVersion": 1,
+  "hostname": "water-plant-01",
+  "collectedAt": "2026-04-05T10:00:00Z",
   "controls": [
     {
-      "control": "supply-chain",
-      "status": "compliant",
-      "framework_articles": {
-        "nis2":      ["21(d)"],
-        "iso27001":  ["A.5.19", "A.5.21"],
-        "cra":       ["Art. 10"]
+      "controlId": "supply-chain",
+      "passed": true,
+      "frameworkArticles": {
+        "nis2":     ["21(d)"],
+        "iso27001": ["A.5.19", "A.5.21"],
+        "cra":      ["Art. 10"]
       },
-      "checks": {
+      "details": {
         "has_configuration_revision": true,
         "sbom_generated": true,
         "closure_package_count": 847,
         "inputs_fresh": true
       }
     }
-  ],
-  "overall": "16/16 controls compliant"
+  ]
 }`}</code></pre>
     <p>
-      <strong>Key design decision:</strong> <code>framework_articles</code> links each control
-      to the articles it satisfies. <code>checks</code> contains the raw probe output, not a
-      summary - auditors verify each individual assertion. The control-level <code>status</code>
-      is derived from <code>checks</code>. It is not asserted by configuration.
+      <strong>Key design decision:</strong> <code>frameworkArticles</code> links each control
+      to the articles it satisfies. <code>details</code> contains the raw probe output, not a
+      summary - auditors verify each individual assertion. The control-level <code>passed</code>
+      boolean is derived from <code>details</code>. It is not asserted by configuration.
     </p>
 
     <h2><span class="num">05</span>Two enforcement modes</h2>
@@ -145,11 +145,14 @@ const pathname = Astro.url.pathname;
 
     <h2><span class="num">06</span>Governance engine</h2>
     <p>
-      Per-rule exceptions with rationale tracking. Operators set
-      <code>compliance.controls.&lt;name&gt;.enforce = false</code> and document the exception
-      inline. Three modes: <code>enforce</code>, <code>permissive</code> (warn-only),
-      <code>disabled</code>. The mode and host type (server, workstation, endpoint) drive
-      sensible defaults per control.
+      Two global enforcement modes via <code>compliance.governance.enforceMode</code>:
+      <code>enforce</code> (controls apply NixOS config AND run probes) or
+      <code>report</code> (controls run probes only, no NixOS config applied) - useful for
+      onboarding regulated estates where you want the compliance signal before flipping any
+      switches. Per-control disabling is independent of the mode: set
+      <code>compliance.controls.&lt;name&gt;.enable = false</code> and document the exception
+      inline. Framework presets default to <code>enforce</code> with a <code>strictness</code>
+      knob that drives sensible per-control defaults.
     </p>
 
     <h2><span class="num">07</span>Compliance-check CLI</h2>

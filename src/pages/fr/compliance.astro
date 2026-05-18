@@ -103,33 +103,33 @@ const pathname = Astro.url.pathname;
       d'enregistrement du contrôle <code>_supply-chain</code> :
     </p>
     <pre class="font-mono text-[0.8em] bg-paper-2 p-4 rounded overflow-x-auto"><code>{`{
-  "host": "water-plant-01",
-  "timestamp": "2026-04-05T10:00:00Z",
+  "schemaVersion": 1,
+  "hostname": "water-plant-01",
+  "collectedAt": "2026-04-05T10:00:00Z",
   "controls": [
     {
-      "control": "supply-chain",
-      "status": "compliant",
-      "framework_articles": {
-        "nis2":      ["21(d)"],
-        "iso27001":  ["A.5.19", "A.5.21"],
-        "cra":       ["Art. 10"]
+      "controlId": "supply-chain",
+      "passed": true,
+      "frameworkArticles": {
+        "nis2":     ["21(d)"],
+        "iso27001": ["A.5.19", "A.5.21"],
+        "cra":      ["Art. 10"]
       },
-      "checks": {
+      "details": {
         "has_configuration_revision": true,
         "sbom_generated": true,
         "closure_package_count": 847,
         "inputs_fresh": true
       }
     }
-  ],
-  "overall": "16/16 controls compliant"
+  ]
 }`}</code></pre>
     <p>
-      <strong>Décision de conception :</strong> <code>framework_articles</code> relie chaque
-      contrôle aux articles qu'il satisfait. <code>checks</code> contient la sortie brute des
+      <strong>Décision de conception :</strong> <code>frameworkArticles</code> relie chaque
+      contrôle aux articles qu'il satisfait. <code>details</code> contient la sortie brute des
       sondes, pas un résumé - les auditeurs vérifient chaque assertion individuellement. Le
-      <code>status</code> au niveau du contrôle est dérivé des <code>checks</code>. Il n'est
-      pas asserté par la configuration.
+      booléen <code>passed</code> au niveau du contrôle est dérivé des <code>details</code>.
+      Il n'est pas asserté par la configuration.
     </p>
 
     <h2><span class="num">05</span>Deux modes d'application</h2>
@@ -148,11 +148,15 @@ const pathname = Astro.url.pathname;
 
     <h2><span class="num">06</span>Moteur de gouvernance</h2>
     <p>
-      Exceptions par règle avec traçabilité de justification. Les opérateurs définissent
-      <code>compliance.controls.&lt;nom&gt;.enforce = false</code> et documentent l'exception
-      en ligne. Trois modes : <code>enforce</code>, <code>permissive</code> (warn-only),
-      <code>disabled</code>. Le mode et le type d'hôte (serveur, poste, endpoint) pilotent
-      des défauts pertinents par contrôle.
+      Deux modes d'application globaux via <code>compliance.governance.enforceMode</code> :
+      <code>enforce</code> (les contrôles appliquent la config NixOS ET exécutent les sondes)
+      ou <code>report</code> (les contrôles exécutent uniquement les sondes, aucune config
+      NixOS appliquée) - utile pour intégrer des parcs régulés où l'on veut le signal de
+      conformité avant d'activer quoi que ce soit. La désactivation par contrôle est
+      indépendante du mode : définir
+      <code>compliance.controls.&lt;nom&gt;.enable = false</code> et documenter l'exception
+      en ligne. Les presets de framework utilisent <code>enforce</code> par défaut, avec un
+      curseur <code>strictness</code> qui pilote les défauts pertinents par contrôle.
     </p>
 
     <h2><span class="num">07</span>CLI compliance-check</h2>
