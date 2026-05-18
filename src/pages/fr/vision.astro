@@ -65,7 +65,7 @@ const rfcs = [
     <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
       {rfcs.map((r) => (
         <div class="bg-paper-2 border border-paper-3 p-5 border-l-[3px] border-l-amber">
-          <div class="font-mono text-[10px] tracking-[2px] text-amber uppercase mb-1">RFC-{r.id}</div>
+          <div class="font-mono text-xs tracking-[2px] text-amber uppercase mb-1">RFC-{r.id}</div>
           <div class="font-display text-base font-bold text-ink mb-2">{r.title}</div>
           <p class="text-[0.88em] text-muted leading-relaxed">{r.body}</p>
         </div>
@@ -151,7 +151,7 @@ const rfcs = [
     </p>
 
     <p class="text-center mt-10">
-      <a href={`/${lang}/contact/?topic=vision`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+      <a href={`/${lang}/contact/?topic=vision`} class="font-mono text-xs tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
         Si votre trajectoire en a besoin sous 18–36 mois, parlons-en maintenant →
       </a>
     </p>

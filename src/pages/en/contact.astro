@@ -47,33 +47,33 @@ const regimes = [
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
-            <label for="name" class="block font-mono text-[10px] tracking-[2px] uppercase text-muted mb-2">{t(lang, 'contactForm.name')} *</label>
+            <label for="name" class="block font-mono text-xs tracking-[2px] uppercase text-muted mb-2">{t(lang, 'contactForm.name')} *</label>
             <input id="name" name="name" type="text" required class="w-full px-4 py-3 bg-paper-2 border border-paper-3 rounded font-body text-[0.95em] text-ink focus:border-indigo focus:outline-none" />
           </div>
           <div>
-            <label for="email" class="block font-mono text-[10px] tracking-[2px] uppercase text-muted mb-2">{t(lang, 'contactForm.email')} *</label>
+            <label for="email" class="block font-mono text-xs tracking-[2px] uppercase text-muted mb-2">{t(lang, 'contactForm.email')} *</label>
             <input id="email" name="email" type="email" required class="w-full px-4 py-3 bg-paper-2 border border-paper-3 rounded font-body text-[0.95em] text-ink focus:border-indigo focus:outline-none" />
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
-            <label for="org" class="block font-mono text-[10px] tracking-[2px] uppercase text-muted mb-2">{t(lang, 'contactForm.org')} *</label>
+            <label for="org" class="block font-mono text-xs tracking-[2px] uppercase text-muted mb-2">{t(lang, 'contactForm.org')} *</label>
             <input id="org" name="org" type="text" required class="w-full px-4 py-3 bg-paper-2 border border-paper-3 rounded font-body text-[0.95em] text-ink focus:border-indigo focus:outline-none" />
           </div>
           <div>
-            <label for="role" class="block font-mono text-[10px] tracking-[2px] uppercase text-muted mb-2">{t(lang, 'contactForm.role')} *</label>
+            <label for="role" class="block font-mono text-xs tracking-[2px] uppercase text-muted mb-2">{t(lang, 'contactForm.role')} *</label>
             <input id="role" name="role" type="text" required class="w-full px-4 py-3 bg-paper-2 border border-paper-3 rounded font-body text-[0.95em] text-ink focus:border-indigo focus:outline-none" />
           </div>
         </div>
 
         <div>
-          <label for="fleet_size" class="block font-mono text-[10px] tracking-[2px] uppercase text-muted mb-2">{t(lang, 'contactForm.fleet_size')} *</label>
+          <label for="fleet_size" class="block font-mono text-xs tracking-[2px] uppercase text-muted mb-2">{t(lang, 'contactForm.fleet_size')} *</label>
           <input id="fleet_size" name="fleet_size" type="number" min="0" required class="w-full md:w-1/3 px-4 py-3 bg-paper-2 border border-paper-3 rounded font-body text-[0.95em] text-ink focus:border-indigo focus:outline-none" />
         </div>
 
         <div>
-          <div class="block font-mono text-[10px] tracking-[2px] uppercase text-muted mb-2">
+          <div class="block font-mono text-xs tracking-[2px] uppercase text-muted mb-2">
             {t(lang, 'contactForm.regime')}
             <span class="lowercase tracking-normal text-muted/70 ml-2">- {t(lang, 'contactForm.regime_help')}</span>
           </div>
@@ -88,7 +88,7 @@ const regimes = [
         </div>
 
         <div>
-          <label for="problem" class="block font-mono text-[10px] tracking-[2px] uppercase text-muted mb-2">
+          <label for="problem" class="block font-mono text-xs tracking-[2px] uppercase text-muted mb-2">
             {t(lang, 'contactForm.problem')}
             <span class="lowercase tracking-normal text-muted/70 ml-2">- {t(lang, 'contactForm.problem_help')}</span>
           </label>
@@ -96,7 +96,7 @@ const regimes = [
         </div>
 
         <div class="pt-2">
-          <button type="submit" class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded bg-indigo text-paper hover:bg-indigo-hover hover:-translate-y-px transition-all inline-block">
+          <button type="submit" class="font-mono text-xs tracking-[1.5px] uppercase px-7 py-3.5 rounded bg-indigo text-paper hover:bg-indigo-hover hover:-translate-y-px transition-all inline-block">
             {t(lang, 'contactForm.submit')} →
           </button>
         </div>
@@ -113,7 +113,7 @@ const regimes = [
       <h2 class="font-display text-xl font-bold text-ink mb-3">{t(lang, 'contactForm.success_title')}</h2>
       <p class="text-[0.95em] text-ink leading-relaxed">{t(lang, 'contactForm.success_body')}</p>
       <p class="mt-5">
-        <a href={`/${lang}/`} class="font-mono text-[11px] tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">← Back to home</a>
+        <a href={`/${lang}/`} class="font-mono text-xs tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">← Back to home</a>
       </p>
     </div>
   </section>

@@ -24,25 +24,25 @@ const isActive = (href: string) => {
 ---
 
 <nav class="relative flex justify-between items-center max-w-content mx-auto px-10 py-5 flex-wrap gap-y-3">
-  <a href={`/${lang}/`} class="font-mono text-[13px] tracking-[3px] text-paper/70 no-underline hover:text-paper/90 transition-colors">
+  <a href={`/${lang}/`} class="font-mono font-bold text-[13px] tracking-[3px] text-paper/70 no-underline hover:text-paper transition-colors">
     ARCANE<span class="text-indigo">SYS</span>
   </a>
-  <div class="flex gap-7 items-center font-body text-sm text-paper/60 flex-wrap">
+  <div class="flex gap-7 items-center font-body text-base text-paper/95 flex-wrap">
     {navItems.map((item) => (
       <a
         href={item.href}
-        class:list={['transition-colors no-underline', isActive(item.href) ? 'text-paper' : 'hover:text-paper/90']}
+        class:list={['transition-colors no-underline', isActive(item.href) ? 'text-paper font-bold' : 'hover:text-paper']}
       >
         {t(lang, `nav.${item.key}`)}
       </a>
     ))}
-    <a href="https://github.com/arcanesys/nixfleet" target="_blank" rel="noopener" class="hover:text-paper/90 transition-colors no-underline">
+    <a href="https://github.com/arcanesys/nixfleet" target="_blank" rel="noopener" class="hover:text-paper transition-colors no-underline">
       {t(lang, 'nav.github')} ↗
     </a>
-    <a href={otherPath} class="hover:text-paper/90 transition-colors uppercase font-mono text-[11px] tracking-[1px] no-underline">
+    <a href={otherPath} class="hover:text-paper transition-colors uppercase font-mono text-xs tracking-[1px] no-underline">
       {otherLang.toUpperCase()}
     </a>
-    <a href={`/${lang}/contact/`} class="text-paper bg-indigo px-4 py-1.5 rounded font-mono text-[11px] tracking-[1px] hover:bg-indigo-hover transition-colors no-underline">
+    <a href={`/${lang}/contact/`} class="text-paper bg-indigo px-4 py-1.5 rounded font-mono text-xs tracking-[1px] hover:bg-indigo-hover transition-colors no-underline">
       {t(lang, 'nav.contact')}
     </a>
   </div>

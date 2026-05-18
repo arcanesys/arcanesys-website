@@ -17,14 +17,14 @@ const subtitle = subtitleKey ? t(lang, subtitleKey) : '';
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 20%, rgba(55,48,163,0.10), transparent), radial-gradient(ellipse 35% 30% at 80% 70%, rgba(6,95,70,0.05), transparent);"></div>
   <Nav lang={lang} pathname={pathname} />
   <div class="relative max-w-hero mx-auto px-10 pt-10 pb-12 text-center">
-    <div class="font-mono text-[16px] tracking-[4px] font-bold text-paper/55 uppercase mb-3">
+    <div class="font-mono text-[16px] tracking-[4px] font-bold text-paper/80 uppercase mb-3">
       NixFleet
     </div>
     <h1 class="font-display text-[clamp(1.8rem,4vw,2.6rem)] font-black leading-[1.1] tracking-tight text-paper">
       {t(lang, titleKey)}
     </h1>
     {subtitle && (
-      <p class="font-body italic text-[1rem] text-paper/55 mt-3 max-w-[600px] mx-auto leading-relaxed">
+      <p class="font-body italic text-[1rem] text-paper/80 mt-3 max-w-[600px] mx-auto leading-relaxed">
         {subtitle}
       </p>
     )}
