@@ -3,3 +3,5 @@ dist/
 .astro/
 .superpowers/
 docs/superpowers/
+node_modules/
+.idea/

@@ -16,7 +16,7 @@ const { lang, pathname } = Astro.props;
   <Nav lang={lang} pathname={pathname} />
 
   <div class="relative max-w-hero mx-auto px-10 pt-15 pb-14 text-center">
-    <div class="font-mono text-[10px] tracking-[5px] text-paper/40 uppercase mb-5">
+    <div class="font-mono text-xs tracking-[5px] text-paper/70 uppercase mb-5">
       {t(lang, 'hero.eyebrow')}
     </div>
 
@@ -24,22 +24,22 @@ const { lang, pathname } = Astro.props;
       {t(lang, 'hero.headline1')}<br />{t(lang, 'hero.headline2')}
     </h1>
 
-    <p class="font-body italic text-[1.05rem] text-paper/55 mt-[18px] max-w-[600px] mx-auto leading-relaxed">
+    <p class="font-body italic text-[1.05rem] text-paper/80 mt-[18px] max-w-[600px] mx-auto leading-relaxed">
       {t(lang, 'hero.subtitle')}
     </p>
 
     <div class="mt-7 max-w-[560px] mx-auto">
       <pre class="font-mono text-[13px] text-paper bg-black/40 border border-paper/20 rounded px-5 py-3 text-left overflow-x-auto m-0"><code>{t(lang, 'hero.command')}</code></pre>
-      <p class="font-body text-[12px] text-paper/45 mt-2 leading-snug">
+      <p class="font-body text-xs text-paper/70 mt-2 leading-snug">
         {t(lang, 'hero.command_caption')}
       </p>
     </div>
 
     <div class="mt-8 flex gap-3.5 justify-center flex-wrap">
-      <a href={`/${lang}/contact/`} class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded bg-indigo text-paper hover:bg-indigo-hover hover:-translate-y-px transition-all no-underline">
+      <a href={`/${lang}/contact/`} class="font-mono text-xs tracking-[1.5px] uppercase px-7 py-3.5 rounded bg-indigo text-paper hover:bg-indigo-hover hover:-translate-y-px transition-all no-underline">
         {t(lang, 'hero.cta_primary')}
       </a>
-      <a href={`/${lang}/demo/`} class="font-mono text-[11px] tracking-[1.5px] uppercase px-7 py-3.5 rounded border border-paper/[0.30] text-paper/70 hover:border-paper/50 hover:text-paper/90 transition-all no-underline">
+      <a href={`/${lang}/demo/`} class="font-mono text-xs tracking-[1.5px] uppercase px-7 py-3.5 rounded border border-paper/[0.30] text-paper/70 hover:border-paper/50 hover:text-paper transition-all no-underline">
         {t(lang, 'hero.cta_secondary')} →
       </a>
     </div>
