@@ -11,10 +11,12 @@ const otherLang = lang === 'en' ? 'fr' : 'en';
 const otherPath = pathname.replace(/^\/(en|fr)/, `/${otherLang}`) || `/${otherLang}/`;
 
 const navItems = [
+  { key: 'services', href: `/${lang}/services/` },
   { key: 'product', href: `/${lang}/product/` },
   { key: 'compliance', href: `/${lang}/compliance/` },
-  { key: 'vision', href: `/${lang}/vision/` },
   { key: 'pilot', href: `/${lang}/pilot/` },
+  { key: 'vision', href: `/${lang}/vision/` },
+  { key: 'about', href: `/${lang}/about/` },
 ];
 
 const isActive = (href: string) => {

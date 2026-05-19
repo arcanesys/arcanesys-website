@@ -1,0 +1,134 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'fr';
+const pathname = Astro.url.pathname;
+
+const services = [
+  {
+    n: '01',
+    accent: 'border-l-rose',
+    eyebrow_color: 'text-rose',
+    eyebrow: 'Pilote',
+    title: '3 mois. 5 à 15 machines. Sans frais.',
+    body: 'Mise en place de votre zone réglementée sur un substrat déclaratif avec preuves signées prêtes pour votre auditeur à 3 mois. Migration depuis Ansible / Puppet / Chef incluse si besoin pendant les 12 semaines. L\'engagement le plus impliquant que nous proposons — et celui que nous cherchons activement pour construire des références.',
+    for_: 'Opérateurs avec une exposition NIS2 / DORA / ANSSI sur 5 à 15 machines, qui veulent éprouver le substrat avant un engagement plus large.',
+    deliverables: 'fleet.nix fonctionnel, forge Git + cache binaire + control plane auto-hébergés, paquet de preuves NIS2 signé à 3 mois, runbook opérationnel.',
+    price: 'Sans frais pendant la phase d\'amorçage du marché.',
+    cta_label: 'Lire l\'offre pilote →',
+    cta_href: '/pilot/',
+  },
+  {
+    n: '02',
+    accent: 'border-l-emerald',
+    eyebrow_color: 'text-emerald',
+    eyebrow: 'Audit de conformité',
+    title: 'Revue à scope fixe contre NIS2 / DORA / ISO 27001 / ANSSI.',
+    body: 'Pour les opérateurs déjà sous NixOS ou qui l\'évaluent. Nous lisons votre pile actuelle au regard du régime réglementaire qui vous concerne et livrons un rapport d\'écart avec cartographie article par article. Le rendu est lisible par un auditeur, pas une sortie d\'évaluateur Nix.',
+    for_: 'RSSI, responsables conformité, leads infra qui ont besoin d\'un regard externe avant d\'allouer un budget 2026 / 2027.',
+    deliverables: 'Rapport d\'écart écrit. Cartographie article par article (NIS2 §21 / DORA Chapitre III / ISO 27001 Annexe A / ANSSI BP-028). Liste de remédiations priorisée avec estimations d\'effort. PDF signé, pas de sortie scanner.',
+    price: 'Typiquement 5 à 10 jours. Taux journalier sur devis.',
+    cta_label: 'Parler d\'un audit →',
+    cta_href: '/contact/?topic=audit',
+  },
+  {
+    n: '03',
+    accent: 'border-l-indigo',
+    eyebrow_color: 'text-indigo',
+    eyebrow: 'Conseil d\'architecture',
+    title: 'À la journée. NixOS, chaînes d\'artefacts signés, preuves de conformité.',
+    body: 'Conseil de niveau RSSI sur les choix d\'infrastructure déclarative : stratégie d\'adoption NixOS, modèles de confiance par artefact signé, conformité par preuves, revue de modèle de menace pour infrastructure régulée. Sessions demi-journée ou journée, à distance ou sur site en UE.',
+    for_: 'Équipes face à la décision acheter-vs-construire-vs-NixOS, ou déjà sous NixOS et qui cherchent à le rendre auditable.',
+    deliverables: 'Sessions de travail avec vos ingénieurs et / ou RSSI. Synthèse écrite des décisions et arbitrages après chaque session. Pas de deck sauf demande.',
+    price: 'Demi-journée ou journée. Taux journalier sur devis.',
+    cta_label: 'Réserver une session →',
+    cta_href: '/contact/?topic=advisory',
+  },
+  {
+    n: '04',
+    accent: 'border-l-amber',
+    eyebrow_color: 'text-amber',
+    eyebrow: 'Développement sur mesure',
+    title: 'Extensions NixFleet, cartographies, intégrations.',
+    body: 'Contrôles de conformité sur mesure, nouvelles cartographies (SecNumCloud, CRA, HDS sur demande), intégrations avec votre pile identité / supervision / inventaire existante, extensions au framework NixFleet lui-même. Scope défini par engagement ; livraison en code public MIT ou AGPL sauf restriction contractuelle.',
+    for_: 'Opérateurs avec un écart précis entre NixFleet aujourd\'hui et ce dont leur flotte a besoin.',
+    deliverables: 'Code mergé dans le dépôt concerné (le vôtre ou le nôtre), tests, documentation, RFC si le changement est structurel.',
+    price: 'Scope par engagement. Forfait à scope fixe possible.',
+    cta_label: 'Cadrer un développement →',
+    cta_href: '/contact/?topic=custom',
+  },
+];
+---
+
+<Layout title="Services - Arcanesys" lang={lang} description="Pilotes, audits de conformité, conseil d'architecture, développement sur mesure. Basés en UE, pas de SaaS, pas de verrouillage. Chaque déploiement tourne sur votre infrastructure.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.services.title"
+    subtitleKey="pageHeader.services.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <p>
+      Nous construisons NixFleet et nous travaillons directement avec les opérateurs qui
+      ont besoin de mettre en place, auditer ou étendre leur parc NixOS réglementé. Quatre
+      modes d'engagement ; chacun commence par un appel de 15 minutes.
+    </p>
+
+    <div class="not-prose space-y-5 my-8">
+      {services.map((s) => (
+        <div class:list={['bg-paper-2 border border-paper-3 p-6 border-l-[3px]', s.accent]}>
+          <div class="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <span class:list={['font-mono text-xs tracking-[3px] uppercase', s.eyebrow_color]}>{s.eyebrow}</span>
+            <span class="font-mono text-[0.7rem] text-muted">{s.n}</span>
+          </div>
+          <h3 class="font-display text-lg font-bold text-ink mb-2 leading-snug">{s.title}</h3>
+          <p class="text-[0.92em] text-muted leading-relaxed mb-3">{s.body}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[0.88em] mb-3">
+            <div>
+              <div class="font-mono text-xs tracking-[2px] text-muted uppercase mb-1">Pour</div>
+              <div class="text-ink leading-relaxed">{s.for_}</div>
+            </div>
+            <div>
+              <div class="font-mono text-xs tracking-[2px] text-muted uppercase mb-1">Livrable</div>
+              <div class="text-ink leading-relaxed">{s.deliverables}</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 pt-3 border-t border-paper-3 text-[0.88em]">
+            <span class="text-ink"><strong>Prix.</strong> {s.price}</span>
+            <a href={`/${lang}${s.cta_href}`} class="font-mono text-xs tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline ml-auto">{s.cta_label}</a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <h2><span class="num">01</span>Comment nous engageons</h2>
+    <ol>
+      <li><strong>Appel de 15 minutes.</strong> Quel problème, quel régime réglementaire, quelle forme de flotte. Pas de formulaire pré-appel à remplir.</li>
+      <li><strong>Proposition écrite.</strong> Scope, calendrier, livrables, prix. Signée avant tout travail.</li>
+      <li><strong>Engagement.</strong> Les pilotes durent 12 semaines. Les audits courent 5 à 10 jours. Le conseil est à la journée. Le développement sur mesure est cadré par engagement.</li>
+      <li><strong>Sortie.</strong> Tout le travail — configurations, fichiers de preuves, documents de cartographie, code sur mesure — reste chez l'opérateur. L'outillage NixOS natif opère la flotte sans nous ensuite.</li>
+    </ol>
+
+    <h2><span class="num">02</span>Conditions communes à tous les engagements</h2>
+    <ul>
+      <li><strong>Pas de SaaS.</strong> Tout tourne sur votre infrastructure. Nous ne détenons aucune clé de signature, aucune donnée client, aucune télémétrie.</li>
+      <li><strong>Aucune donnée opérateur ne quitte votre périmètre</strong> sauf si vous autorisez explicitement un extrait (ex. : échantillon de preuves pour un rapport pilote).</li>
+      <li><strong>Code MIT / AGPL, public sur GitHub.</strong> Chaque ligne livrée est auditable.</li>
+      <li><strong>Basés en UE.</strong> Facturation depuis l'UE. TVA applicable. Aucune exposition Cloud Act sur la chaîne de confiance.</li>
+      <li><strong>Taux journalier indicatif : 1500 à 2500 €</strong> selon scope, séniorité requise et délai. Les pilotes sont sans frais pendant la phase d'amorçage du marché. Forfaits à scope fixe possibles sur demande.</li>
+    </ul>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/contact/`} class="font-mono text-xs tracking-[1.5px] uppercase px-7 py-3.5 rounded bg-indigo text-paper hover:bg-indigo-hover hover:-translate-y-px transition-all inline-block no-underline">
+        Parlez-nous de votre régime réglementaire →
+      </a>
+    </p>
+  </article>
+
+  <CtaSection lang={lang} />
+  <Footer lang={lang} />
+</Layout>

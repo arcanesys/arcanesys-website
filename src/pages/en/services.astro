@@ -1,0 +1,134 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en';
+const pathname = Astro.url.pathname;
+
+const services = [
+  {
+    n: '01',
+    accent: 'border-l-rose',
+    eyebrow_color: 'text-rose',
+    eyebrow: 'Pilot',
+    title: '3 months. 5–15 hosts. Free.',
+    body: 'Bootstrap your regulated zone on a declarative substrate with signed evidence ready for your auditor at month 3. Ansible / Puppet / Chef migration during the 12 weeks if you need it. The most committed engagement we offer — and the one we are actively looking for to build references.',
+    for_: 'Operators with a NIS2 / DORA / ANSSI exposure on 5–15 hosts who want to test the substrate before committing further.',
+    deliverables: 'Working fleet.nix, self-hosted Git forge + binary cache + control plane, signed NIS2 evidence packet at month 3, operations runbook.',
+    price: 'Free during the market-finding phase.',
+    cta_label: 'Read the pilot offer →',
+    cta_href: '/pilot/',
+  },
+  {
+    n: '02',
+    accent: 'border-l-emerald',
+    eyebrow_color: 'text-emerald',
+    eyebrow: 'Compliance audit',
+    title: 'Fixed-scope review against NIS2 / DORA / ISO 27001 / ANSSI.',
+    body: 'For operators already on NixOS or evaluating it. We read your current stack against the regulatory regime you are subject to and deliver a gap report with article-by-article mapping. Output is auditor-readable, not Nix-evaluator gibberish.',
+    for_: 'RSSIs, compliance officers, and infra leads who need an external read before allocating a 2026 / 2027 budget.',
+    deliverables: 'Written gap report. Article-by-article mapping (NIS2 §21 / DORA chapter III / ISO 27001 Annex A / ANSSI BP-028). Prioritised remediation list with effort estimates. Signed PDF, no scanner output.',
+    price: 'Typically 5–10 days. Day rate by quote.',
+    cta_label: 'Talk about an audit →',
+    cta_href: '/contact/?topic=audit',
+  },
+  {
+    n: '03',
+    accent: 'border-l-indigo',
+    eyebrow_color: 'text-indigo',
+    eyebrow: 'Architecture advisory',
+    title: 'By the day. NixOS, signed-artifact chains, compliance evidence.',
+    body: 'RSSI-level advisory on declarative infrastructure choices: NixOS adoption strategy, signed-artifact trust models, evidence-based compliance, threat-model review for regulated infrastructure. Sessions are half-day or full-day, remote or on-site in the EU.',
+    for_: 'Teams making the buy-vs-build-vs-NixOS decision, or already on NixOS and wondering how to make it auditable.',
+    deliverables: 'Working sessions with your engineers and / or RSSI. Written summary of decisions and trade-offs after each session. No deck unless you ask for one.',
+    price: 'Half-day or full-day. Day rate by quote.',
+    cta_label: 'Book an advisory call →',
+    cta_href: '/contact/?topic=advisory',
+  },
+  {
+    n: '04',
+    accent: 'border-l-amber',
+    eyebrow_color: 'text-amber',
+    eyebrow: 'Custom development',
+    title: 'NixFleet extensions, framework mappings, integrations.',
+    body: 'Custom compliance controls, new framework mappings (SecNumCloud, CRA, HDS on request), integrations against your existing identity / monitoring / inventory stack, framework extensions to NixFleet itself. We scope per engagement; we deliver in MIT or AGPL public code unless contractually restricted.',
+    for_: 'Operators with a specific gap between NixFleet today and what their fleet needs.',
+    deliverables: 'Merged code in the relevant repository (yours or ours), tests, documentation, RFC if the change is structural.',
+    price: 'Scoped per engagement. Fixed-price scoping available.',
+    cta_label: 'Scope custom work →',
+    cta_href: '/contact/?topic=custom',
+  },
+];
+---
+
+<Layout title="Services - Arcanesys" lang={lang} description="Pilots, compliance audits, architecture advisory, custom development. EU based, no SaaS, no lock-in. Every deployment runs on your infrastructure.">
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.services.title"
+    subtitleKey="pageHeader.services.subtitle"
+  />
+
+  <article class="prose max-w-prose mx-auto px-10 py-12">
+    <p>
+      We build NixFleet, and we work directly with operators who need their regulated
+      NixOS estate stood up, audited, or extended. Four engagement shapes; each one starts
+      with a 15-minute call.
+    </p>
+
+    <div class="not-prose space-y-5 my-8">
+      {services.map((s) => (
+        <div class:list={['bg-paper-2 border border-paper-3 p-6 border-l-[3px]', s.accent]}>
+          <div class="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <span class:list={['font-mono text-xs tracking-[3px] uppercase', s.eyebrow_color]}>{s.eyebrow}</span>
+            <span class="font-mono text-[0.7rem] text-muted">{s.n}</span>
+          </div>
+          <h3 class="font-display text-lg font-bold text-ink mb-2 leading-snug">{s.title}</h3>
+          <p class="text-[0.92em] text-muted leading-relaxed mb-3">{s.body}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[0.88em] mb-3">
+            <div>
+              <div class="font-mono text-xs tracking-[2px] text-muted uppercase mb-1">For</div>
+              <div class="text-ink leading-relaxed">{s.for_}</div>
+            </div>
+            <div>
+              <div class="font-mono text-xs tracking-[2px] text-muted uppercase mb-1">Deliverable</div>
+              <div class="text-ink leading-relaxed">{s.deliverables}</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 pt-3 border-t border-paper-3 text-[0.88em]">
+            <span class="text-ink"><strong>Price.</strong> {s.price}</span>
+            <a href={`/${lang}${s.cta_href}`} class="font-mono text-xs tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline ml-auto">{s.cta_label}</a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <h2><span class="num">01</span>How we engage</h2>
+    <ol>
+      <li><strong>15-minute call.</strong> What problem, what regulatory regime, what fleet shape. No pre-call form to fill out.</li>
+      <li><strong>Written proposal.</strong> Scope, schedule, deliverables, price. Signed before any work starts.</li>
+      <li><strong>Engagement.</strong> Pilots run 12 weeks. Audits run 5–10 days. Advisory is by the day. Custom development is scoped per engagement.</li>
+      <li><strong>Exit.</strong> All work product — configurations, evidence files, mapping documents, custom code — stays with the operator. Native NixOS tooling operates the fleet without us afterwards.</li>
+    </ol>
+
+    <h2><span class="num">02</span>Conditions common to all engagements</h2>
+    <ul>
+      <li><strong>No SaaS.</strong> Everything runs on your infrastructure. We hold no signing keys, no customer data, no telemetry.</li>
+      <li><strong>No operator data leaves your perimeter</strong> unless you explicitly authorise a snippet (e.g., an evidence sample for a pilot report).</li>
+      <li><strong>MIT / AGPL code, public on GitHub.</strong> You can audit every line we ship.</li>
+      <li><strong>EU based.</strong> Invoicing from the EU. VAT applicable. No Cloud Act exposure on any part of the trust chain.</li>
+      <li><strong>Indicative day rate: €1500–2500</strong> depending on scope, seniority required, and turnaround. Pilots are free during the market-finding phase. Fixed-price options available on request.</li>
+    </ul>
+
+    <p class="text-center mt-10">
+      <a href={`/${lang}/contact/`} class="font-mono text-xs tracking-[1.5px] uppercase px-7 py-3.5 rounded bg-indigo text-paper hover:bg-indigo-hover hover:-translate-y-px transition-all inline-block no-underline">
+        Talk to us about your regulatory regime →
+      </a>
+    </p>
+  </article>
+
+  <CtaSection lang={lang} />
+  <Footer lang={lang} />
+</Layout>
