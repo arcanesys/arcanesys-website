@@ -93,6 +93,10 @@
       "title": "Book a 15-minute call",
       "subtitle": "Tell us about your fleet and your regulatory regime. We get back to you within one business day."
     },
+    "contactThanks": {
+      "title": "Thanks - message received.",
+      "subtitle": "We get back to you within one business day."
+    },
     "privacy": {
       "title": "Privacy Policy",
       "subtitle": "GDPR-minimal. We collect only what we need to talk to you."

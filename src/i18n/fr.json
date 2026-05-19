@@ -93,6 +93,10 @@
       "title": "Réservez un appel de 15 min",
       "subtitle": "Parlez-nous de votre flotte et de votre régime réglementaire. Nous répondons sous un jour ouvré."
     },
+    "contactThanks": {
+      "title": "Merci - message reçu.",
+      "subtitle": "Réponse sous un jour ouvré."
+    },
     "privacy": {
       "title": "Confidentialité",
       "subtitle": "RGPD a minima. Nous ne collectons que ce qui est nécessaire à l'échange."
