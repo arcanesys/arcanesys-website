@@ -15,7 +15,7 @@
     "eyebrow": "ARCANESYS",
     "headline1": "Conformité NixOS auditable",
     "headline2": "pour l'Europe régulée",
-    "subtitle": "Pratique européenne indépendante. Nous construisons NixFleet, GitOps signé pour les flottes NixOS avec preuves NIS2, DORA, ISO 27001 et ANSSI BP-028 produites comme effet de bord, et menons pilotes, audits et conseils pour opérateurs régulés.",
+    "subtitle": "Cabinet européen indépendant. Nous construisons NixFleet, GitOps signé pour les flottes NixOS dont les preuves NIS2, DORA, ISO 27001 et ANSSI BP-028 sont produites comme effet de bord. Pilotes, audits et conseils pour opérateurs régulés.",
     "command": "nix run github:arcanesys/nixfleet-demo",
     "command_caption": "Démo monohôte avec preuves signées. Nécessite Nix avec les flakes activés et /dev/kvm. macOS : voir la doc.",
     "cta_primary": "Réserver un appel de 15 min",
@@ -88,7 +88,7 @@
     },
     "about": {
       "title": "À propos d'Arcanesys",
-      "subtitle": "Deux fondateurs. Trois dépôts publics. Basés en UE. Les gens derrière NixFleet."
+      "subtitle": "L'équipe derrière NixFleet. Trois dépôts publics. Basés en UE, open source par défaut."
     },
     "services": {
       "title": "Services",
