@@ -8,7 +8,8 @@
     <!--
       Static placeholder so Netlify's build-time form parser reliably
       detects the contact form. Astro renders the real form on
-      /fr/contact/ and /en/contact/; both POST to name="contact".
+      /fr/contact/ and /en/contact/; both POST to name="contact"
+      and redirect to /{lang}/contact/thanks/ on success.
       Do not link to this file from the site.
     -->
     <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
