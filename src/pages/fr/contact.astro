@@ -28,13 +28,13 @@ const regimes = [
   />
 
   <section class="max-w-prose mx-auto px-10 py-12">
-    <div id="form-wrapper">
+    <div>
       <form
         name="contact"
         method="POST"
         data-netlify="true"
         netlify-honeypot="bot-field"
-        action={`/${lang}/contact/?success=1`}
+        action={`/${lang}/contact/thanks/`}
         class="space-y-5"
       >
         <input type="hidden" name="form-name" value="contact" />
@@ -108,26 +108,11 @@ const regimes = [
         qui est nécessaire pour répondre. Voir <a href={`/${lang}/legal/privacy/`}>Confidentialité</a>.
       </p>
     </div>
-
-    <div id="success-wrapper" class="hidden bg-paper-2 border border-paper-3 border-l-[3px] border-l-emerald p-8">
-      <h2 class="font-display text-xl font-bold text-ink mb-3">{t(lang, 'contactForm.success_title')}</h2>
-      <p class="text-[0.95em] text-ink leading-relaxed">{t(lang, 'contactForm.success_body')}</p>
-      <p class="mt-5">
-        <a href={`/${lang}/`} class="font-mono text-xs tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">← Retour à l'accueil</a>
-      </p>
-    </div>
   </section>
 
   <script is:inline>
     (function () {
       var params = new URLSearchParams(location.search);
-      if (params.get('success') === '1') {
-        var form = document.getElementById('form-wrapper');
-        var success = document.getElementById('success-wrapper');
-        if (form) form.classList.add('hidden');
-        if (success) success.classList.remove('hidden');
-        window.scrollTo(0, 0);
-      }
       var topic = params.get('topic');
       if (topic) {
         var hidden = document.getElementById('topic-hidden');

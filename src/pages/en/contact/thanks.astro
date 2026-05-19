@@ -1,0 +1,34 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Footer from '../../../components/Footer.astro';
+import { t } from '../../../i18n/utils';
+
+const lang = 'en';
+const pathname = Astro.url.pathname;
+---
+
+<Layout
+  title="Thanks - Arcanesys"
+  lang={lang}
+  description="Your message reached us. We reply within one business day."
+>
+  <PageHeader
+    lang={lang}
+    pathname={pathname}
+    titleKey="pageHeader.contactThanks.title"
+    subtitleKey="pageHeader.contactThanks.subtitle"
+  />
+
+  <section class="max-w-prose mx-auto px-10 py-12">
+    <div class="bg-paper-2 border border-paper-3 border-l-[3px] border-l-emerald p-8">
+      <h2 class="font-display text-xl font-bold text-ink mb-3">{t(lang, 'contactForm.success_title')}</h2>
+      <p class="text-[0.95em] text-ink leading-relaxed">{t(lang, 'contactForm.success_body')}</p>
+      <p class="mt-5">
+        <a href={`/${lang}/`} class="font-mono text-xs tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">← Back to home</a>
+      </p>
+    </div>
+  </section>
+
+  <Footer lang={lang} />
+</Layout>
