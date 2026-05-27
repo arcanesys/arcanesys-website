@@ -1,6 +1,7 @@
 {
   "nav": {
     "brand": "ARCANESYS",
+    "services": "Services",
     "product": "Product",
     "compliance": "Compliance",
     "vision": "Vision",
@@ -11,10 +12,10 @@
     "contact": "Contact"
   },
   "hero": {
-    "eyebrow": "NixFleet",
-    "headline1": "Signed GitOps fleet management",
-    "headline2": "for NixOS",
-    "subtitle": "Declarative, signed, sovereign. Built for EU operators under NIS2, DORA, ISO 27001, and ANSSI BP-028.",
+    "eyebrow": "ARCANESYS",
+    "headline1": "Auditable NixOS compliance",
+    "headline2": "for regulated Europe",
+    "subtitle": "Independent EU practice. We build NixFleet — declarative, signed GitOps for NixOS fleets with NIS2, DORA, ISO 27001, and ANSSI BP-028 evidence as a side effect of operation — and run pilots, audits, and advisory for regulated operators.",
     "command": "nix run github:arcanesys/nixfleet-demo",
     "command_caption": "Single-host signed-evidence demo. Requires Nix with flakes enabled and /dev/kvm. macOS: see docs.",
     "cta_primary": "Book a 15-min call",
@@ -36,7 +37,7 @@
     "button": "Book a 15-min call"
   },
   "footer": {
-    "tagline": "Signed GitOps fleet management for regulated Europe.",
+    "tagline": "Signed GitOps for NixOS fleets in regulated Europe.",
     "license": "MIT framework · AGPL control plane · European sovereignty · 2026",
     "product_heading": "Product",
     "program_heading": "Program",
@@ -87,7 +88,11 @@
     },
     "about": {
       "title": "About Arcanesys",
-      "subtitle": "Why we built this. Why now. What this is not."
+      "subtitle": "The team behind NixFleet. Three public repositories. EU-based, open source by default."
+    },
+    "services": {
+      "title": "Services",
+      "subtitle": "What we deliver. How we engage. No SaaS, no lock-in, every deployment on your infrastructure."
     },
     "contact": {
       "title": "Book a 15-minute call",

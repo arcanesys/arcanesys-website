@@ -8,7 +8,7 @@ const lang = 'fr';
 const pathname = Astro.url.pathname;
 ---
 
-<Layout title="À propos - Arcanesys" lang={lang} description="Pourquoi, pourquoi maintenant, ce que ce n'est pas. Indépendant, basé en UE, souveraineté-first par design. Manuel Wegria / Vincent Romagnoli.">
+<Layout title="À propos - Arcanesys" lang={lang} description="Cabinet européen indépendant. Auteurs de NixFleet et des modules nixfleet-compliance. Contributeurs à cloud-gouv/securix et nixpkgs.">
   <PageHeader
     lang={lang}
     pathname={pathname}
@@ -18,61 +18,118 @@ const pathname = Astro.url.pathname;
 
   <article class="prose max-w-prose mx-auto px-10 py-12">
 
-    <h2><span class="num">01</span>Pourquoi nous avons construit ceci</h2>
+    <h2><span class="num">01</span>Ce que fait Arcanesys</h2>
     <p>
-      Nous opérions des flottes NixOS depuis des années avant de construire NixFleet. Les
-      quatre crises listées sur la page d'accueil ne sont pas académiques. Elles étaient la
-      texture quotidienne des opérations : dérive de configuration sur une infrastructure
-      dont nous ne pouvions pas prouver l'identité, exposition à la souveraineté sur des
-      control planes cloud que nous ne contrôlions pas, sécurité rapportée par des outils de
-      détection sur lesquels nous ne pouvions pas raisonner, et conformité produite en PDF
-      par des humains plutôt qu'en preuves signées par le système.
+      Arcanesys est un cabinet européen indépendant. Nous construisons NixFleet,
+      GitOps signé pour les flottes NixOS dont les preuves NIS2 / DORA / ISO 27001 /
+      ANSSI BP-028 sont produites comme effet de bord de l'exploitation. Nous
+      travaillons directement avec les opérateurs qui ont besoin de migrer, auditer ou
+      étendre leur zone réglementée sous ces régimes.
     </p>
     <p>
-      NixFleet est le framework que nous voulions : chaîne d'artefacts signés de bout en
-      bout, rollback magique comme propriété de protocole, conformité comme porte de release.
-      Le but n'est pas la nouveauté. Le but est que chacune de ces propriétés existe déjà
-      dans le modèle Nix. Nous les avons assemblées.
-    </p>
-
-    <h2><span class="num">02</span>Pourquoi maintenant</h2>
-    <p>
-      Les échéances de transposition NIS2 sont passées. DORA est applicable aux entités
-      financières depuis janvier 2025. ANSSI BP-028 v2.0 est la référence pour le hardening
-      des infrastructures françaises. Les opérateurs sous ces régimes ont besoin d'un
-      outillage déclaratif qui produit des preuves signées comme effet de bord du
-      fonctionnement normal, pas un projet conformité séparé empilé par-dessus une pile
-      impérative.
+      Deux modes d'engagement ont la même importance. NixFleet est livré en open source
+      (framework MIT, control plane AGPL) — chacun peut l'adopter sans jamais nous parler.
+      Pilotes, audits et conseil sont la façon dont nous travaillons en profondeur avec un
+      opérateur sur sa zone réglementée. <strong>Pas de SaaS. Pas de control plane hébergé.
+      Chaque déploiement tourne sur la forge, le cache et l'infrastructure de l'opérateur.</strong>
     </p>
 
-    <h2><span class="num">03</span>Ce que ce n'est pas</h2>
+    <h2><span class="num">02</span>Ce que nous avons construit</h2>
+    <p>Trois dépôts publics portent le travail :</p>
     <ul>
-      <li><strong>Pas une startup story.</strong> Pas de levée, pas de valorisation, pas de trajectoire IPO. Le cœur open-source se finance par les tiers Pro et Enterprise. Le surplus finance le travail open-source.</li>
-      <li><strong>Pas d'AI-anything.</strong> NixFleet est un framework système. Le modèle de confiance repose sur des primitives cryptographiques, pas sur de l'inférence probabiliste.</li>
-      <li><strong>Pas VC-backed.</strong> Indépendant, basé en UE, souveraineté-first par design et par économie.</li>
-      <li><strong>Pas en train de prétendre être 50 personnes.</strong> Fondateur plus écosystème. Le framework bénéficie de la communauté NixOS au sens large. Le travail commercial est délivré par un petit cœur.</li>
-    </ul>
-
-    <h2><span class="num">04</span>Fondateurs</h2>
-    <ul>
-      <li><strong>Vincent Romagnoli</strong> — pilotes, partenariats, relation publique.</li>
-      <li><strong>Manuel Wegria</strong> — architecture, release engineering.</li>
+      <li>
+        <strong><a href="https://github.com/arcanesys/nixfleet">arcanesys/nixfleet</a></strong> —
+        framework, agent, control plane, CLI, CI. Environ 44 500 lignes de Rust sur neuf
+        crates ; 22 modules Nix de production ; mTLS, rollback magique à échéance,
+        promotion par vagues entre canaux, quarantaine par hash de closure. v0.2 taguée.
+      </li>
+      <li>
+        <strong><a href="https://github.com/arcanesys/nixfleet-compliance">arcanesys/nixfleet-compliance</a></strong> —
+        16 contrôles de conformité typés, 4 référentiels (NIS2, DORA, ISO 27001, ANSSI
+        BP-028), preuves signées par hôte au format JCS (RFC&nbsp;8785), moteur de
+        gouvernance avec exceptions par contrôle et justification obligatoire.
+      </li>
+      <li>
+        <strong><a href="https://github.com/arcanesys/nixfleet-demo">arcanesys/nixfleet-demo</a></strong> —
+        flotte de référence à quatre VMs, démarrable en une dizaine de minutes. Démontre
+        toute la chaîne d'artefacts signés sur un seul poste.
+      </li>
     </ul>
     <p>
-      Demandes pilote : <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a>.
-      Rapports de sécurité : <a href="mailto:security@arcanesys.fr">security@arcanesys.fr</a>.
+      La chaîne d'artefacts signés est exercée par 15 scénarios fleet-harness de bout en
+      bout. Les fichiers de preuves sont reproductibles hors ligne avec
+      <code>nixfleet-compliance-verify</code> : les auditeurs n'ont pas besoin de nous faire
+      confiance, ni à l'opérateur, ni à un éditeur de scanner — ils vérifient eux-mêmes la
+      chaîne à partir des trois fichiers que le collecteur écrit.
     </p>
 
-    <h2><span class="num">05</span>Où trouver le code</h2>
+    <h2><span class="num">03</span>Travail upstream</h2>
+    <p>Au-delà de nos propres dépôts, nous contribuons aux projets dont nous dépendons :</p>
     <ul>
-      <li><a href="https://github.com/arcanesys/nixfleet">arcanesys/nixfleet</a> : framework, agent, control plane, CLI, CI</li>
-      <li><a href="https://github.com/arcanesys/nixfleet-compliance">arcanesys/nixfleet-compliance</a> : 16 contrôles + moteur de gouvernance</li>
-      <li><a href="https://github.com/arcanesys/nixfleet-demo">arcanesys/nixfleet-demo</a> : flotte de référence à 4 VMs</li>
+      <li>
+        <strong>cloud-gouv/securix</strong> — Sécurix est la distribution NixOS durcie de
+        la DINUM. Nous avons une proposition de wrapper flake en cours (issue&nbsp;#180,
+        brouillon de PR vers&nbsp;#126) qui permet à des projets aval de consommer
+        Sécurix en tant qu'entrée flake sans activer les flakes par hôte.
+      </li>
+      <li><strong>nixpkgs</strong> — corrections de packaging et de modules remontées au cours du travail sur NixFleet.</li>
+      <li>
+        <strong>RFCs</strong> — douze RFCs internes couvrant modèle de confiance, cycle de
+        vie des rollouts, attestation matérielle, fenêtres de fraîcheur et opération
+        air-gap. Sept implémentés, quatre en phase de design avec critères falsifiables.
+        Tous publics dans le dépôt nixfleet.
+      </li>
     </ul>
 
-    <p class="text-center mt-10">
+    <h2><span class="num">04</span>L'équipe</h2>
+    <ul>
+      <li>
+        <strong>Manuel Wegria</strong> — architecture, release engineering, agent et
+        control plane Rust. Auteur principal du code.
+        <a href="https://github.com/abstracts33d">github.com/abstracts33d</a>.
+      </li>
+      <li>
+        <strong>Vincent Romagnoli</strong> — pilotes, cartographie de conformité, relation
+        publique. Gère les échanges côté opérateur et l'ancrage réglementaire.
+      </li>
+    </ul>
+    <p>
+      Nous nous appuyons sur un cercle de contributeurs NixOS européens lorsqu'un
+      projet en bénéficie. Les engagements commerciaux sont livrés directement par
+      l'équipe.
+    </p>
+
+    <h2><span class="num">05</span>Comment nous travaillons</h2>
+    <ul>
+      <li><strong>Pas de SaaS.</strong> Chaque déploiement tourne sur l'infrastructure de l'opérateur. Nous ne détenons aucune clé de signature, aucune donnée client, aucune télémétrie.</li>
+      <li><strong>Framework MIT, control plane AGPL.</strong> La séparation est volontaire : termes permissifs pour les intégrateurs, termes viraux pour les hébergeurs. Les modules de conformité sont MIT.</li>
+      <li><strong>Engagement direct.</strong> Les pilotes sont du pair-engineering, pas du deck-puis-livraison. Les ingénieurs de l'opérateur en sortent capables d'opérer la flotte sans nous.</li>
+      <li><strong>Pas de NDA pour commencer.</strong> Dépôts publics, RFCs publics, cartographies publiques. Les échanges se formalisent quand un accord pilote est signé.</li>
+      <li><strong>Basés en UE.</strong> Facturation depuis l'UE, TVA applicable, aucune exposition Cloud Act sur la chaîne de confiance.</li>
+    </ul>
+
+    <h2><span class="num">06</span>Pourquoi maintenant</h2>
+    <p>
+      NIS2 est transposée en France (Loi Résilience, mars 2025) avec conformité complète
+      requise d'ici fin 2027. DORA s'applique aux entités financières depuis janvier 2025.
+      ANSSI BP-028 v2.0 est la référence pour le hardening d'infrastructure française.
+      La qualification SecNumCloud et le règlement CRA sont à venir. Ces régimes ont besoin
+      d'un outillage déclaratif qui produit des preuves signées comme effet de bord du
+      fonctionnement normal — pas un projet conformité séparé empilé sur une pile impérative.
+    </p>
+
+    <h2><span class="num">07</span>Contact</h2>
+    <ul>
+      <li>Demandes pilote : <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a></li>
+      <li>Rapports de sécurité : <a href="mailto:security@arcanesys.fr">security@arcanesys.fr</a></li>
+    </ul>
+
+    <p class="text-center mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+      <a href={`/${lang}/services/`} class="font-mono text-xs tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        Voir nos services →
+      </a>
       <a href={`/${lang}/contact/`} class="font-mono text-xs tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
-        Ouvrir une conversation →
+        Prendre contact →
       </a>
     </p>
   </article>

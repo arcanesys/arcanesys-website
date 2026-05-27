@@ -8,7 +8,7 @@ const lang = 'en';
 const pathname = Astro.url.pathname;
 ---
 
-<Layout title="About - Arcanesys" lang={lang} description="Why we built this, why now, what this is not. Independent, EU-based, sovereignty-first by design. Manuel Wegria / Vincent Romagnoli.">
+<Layout title="About - Arcanesys" lang={lang} description="Independent EU practice. Authors of NixFleet and the nixfleet-compliance modules. Contributors to cloud-gouv/securix and nixpkgs.">
   <PageHeader
     lang={lang}
     pathname={pathname}
@@ -18,57 +18,113 @@ const pathname = Astro.url.pathname;
 
   <article class="prose max-w-prose mx-auto px-10 py-12">
 
-    <h2><span class="num">01</span>Why we built this</h2>
+    <h2><span class="num">01</span>What Arcanesys does</h2>
     <p>
-      We managed NixOS fleets for years before we built NixFleet. The four crises listed on
-      the home page are not academic. They were the daily texture of operations: configuration
-      drift on infrastructure we could not prove was identical, sovereignty exposure on cloud
-      control planes we did not control, security bolted on by detection tools we could not
-      reason about, and compliance produced as PDFs by humans rather than as signed evidence
-      by the system.
+      Arcanesys is an independent EU practice. We build NixFleet, declarative, signed
+      GitOps for NixOS fleets with NIS2 / DORA / ISO 27001 / ANSSI BP-028 evidence
+      produced as a side effect of operation. We work directly with operators who need
+      their regulated zone migrated, audited, or extended under those regimes.
     </p>
     <p>
-      NixFleet is the framework we wanted: the signed-artifact chain end-to-end, magic
-      rollback as a protocol property, compliance as a release gate. The point is not novelty.
-      The point is that each of these properties already exists in the Nix model. We
-      assembled them.
-    </p>
-
-    <h2><span class="num">02</span>Why now</h2>
-    <p>
-      NIS2 transposition deadlines have passed. DORA is applicable to financial entities
-      since January 2025. ANSSI BP-028 v2.0 is the reference for French infrastructure
-      hardening. Operators under these regimes need declarative tooling that produces signed
-      evidence as a side effect of normal operation, not a separate compliance project
-      layered on top of an imperative stack.
+      Two engagement shapes are equally important to us. NixFleet ships as open source
+      (MIT framework, AGPL control plane) — anyone can adopt it without ever speaking
+      to us. Pilots, audits, and advisory are the way we go deep with a specific
+      operator's regulated estate. <strong>No SaaS. No hosted control plane. Every
+      deployment runs on the operator's own forge, cache, and infrastructure.</strong>
     </p>
 
-    <h2><span class="num">03</span>What this is not</h2>
+    <h2><span class="num">02</span>What we have built</h2>
+    <p>Three public repositories carry the work:</p>
     <ul>
-      <li><strong>Not a startup story.</strong> No funding round, no valuation, no IPO trajectory. The open core funds itself through Pro and Enterprise tiers. The surplus funds open-source work.</li>
-      <li><strong>Not AI-anything.</strong> NixFleet is a systems framework. The trust model relies on cryptographic primitives, not on probabilistic inference.</li>
-      <li><strong>Not VC-backed.</strong> Independent, EU-based, sovereignty-first by design and by economics.</li>
-      <li><strong>Not pretending to be 50 people.</strong> Founder plus ecosystem. The framework benefits from the broader NixOS community. Commercial work is delivered by a small core.</li>
-    </ul>
-
-    <h2><span class="num">04</span>Founders</h2>
-    <ul>
-      <li><strong>Vincent Romagnoli</strong> — pilots, partnerships, public-facing outreach.</li>
-      <li><strong>Manuel Wegria</strong> — architecture, release engineering.</li>
+      <li>
+        <strong><a href="https://github.com/arcanesys/nixfleet">arcanesys/nixfleet</a></strong> —
+        framework, agent, control plane, CLI, CI. Around 44,500 lines of Rust across nine
+        crates; 22 production Nix modules; mTLS, magic rollback with deadline, channel-gated
+        waves, closure-hash quarantine. v0.2 tagged.
+      </li>
+      <li>
+        <strong><a href="https://github.com/arcanesys/nixfleet-compliance">arcanesys/nixfleet-compliance</a></strong> —
+        16 typed compliance controls, 4 frameworks (NIS2, DORA, ISO 27001, ANSSI BP-028),
+        JCS-signed evidence per host (RFC&nbsp;8785), governance engine with per-control
+        exceptions and mandatory rationale.
+      </li>
+      <li>
+        <strong><a href="https://github.com/arcanesys/nixfleet-demo">arcanesys/nixfleet-demo</a></strong> —
+        a four-VM reference fleet bootstrappable in about 10 minutes. Demonstrates the
+        signed-artifact chain end to end on a single laptop.
+      </li>
     </ul>
     <p>
-      Pilot enquiries: <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a>.
-      Security reports: <a href="mailto:security@arcanesys.fr">security@arcanesys.fr</a>.
+      The signed-artifact chain is exercised by 15 end-to-end fleet-harness scenarios.
+      Evidence files are reproducible offline with <code>nixfleet-compliance-verify</code>:
+      auditors do not have to trust us, the operator, or a scanner vendor — they verify the
+      chain themselves with the three files the collector writes.
     </p>
 
-    <h2><span class="num">05</span>Where to find the code</h2>
+    <h2><span class="num">03</span>Upstream work</h2>
+    <p>Beyond our own repositories, we contribute to projects we depend on:</p>
     <ul>
-      <li><a href="https://github.com/arcanesys/nixfleet">arcanesys/nixfleet</a>: framework, agent, control plane, CLI, CI</li>
-      <li><a href="https://github.com/arcanesys/nixfleet-compliance">arcanesys/nixfleet-compliance</a>: 16 controls + governance engine</li>
-      <li><a href="https://github.com/arcanesys/nixfleet-demo">arcanesys/nixfleet-demo</a>: 4-VM reference fleet</li>
+      <li>
+        <strong>cloud-gouv/securix</strong> — Sécurix is DINUM's hardened NixOS
+        distribution. We have a flake-wrapper proposal in flight (issue&nbsp;#180, PR draft
+        against&nbsp;#126) that lets downstream projects consume Sécurix as a flake input
+        without enabling flakes per-host.
+      </li>
+      <li><strong>nixpkgs</strong> — packaging and module fixes upstreamed during the work on NixFleet.</li>
+      <li>
+        <strong>RFCs</strong> — twelve internal RFCs covering trust model, rollout lifecycle,
+        hardware-rooted attestation, freshness windows, and air-gapped operation. Seven
+        implemented, four at design stage with falsifiable done-criteria. All public in the
+        nixfleet repo.
+      </li>
     </ul>
 
-    <p class="text-center mt-10">
+    <h2><span class="num">04</span>The team</h2>
+    <ul>
+      <li>
+        <strong>Manuel Wegria</strong> — architecture, release engineering, the Rust agent
+        and control plane. Authors most of the codebase.
+        <a href="https://github.com/abstracts33d">github.com/abstracts33d</a>.
+      </li>
+      <li>
+        <strong>Vincent Romagnoli</strong> — pilots, compliance mapping, public-facing
+        work. Handles operator-side conversations and regulatory anchoring.
+      </li>
+    </ul>
+    <p>
+      We work with a small set of EU NixOS contributors when a project benefits from it.
+      Commercial engagements are delivered directly by the team.
+    </p>
+
+    <h2><span class="num">05</span>How we work</h2>
+    <ul>
+      <li><strong>No SaaS.</strong> Every deployment runs on the operator's infrastructure. We hold no signing keys, no customer data, no telemetry.</li>
+      <li><strong>MIT framework, AGPL control plane.</strong> The split is deliberate: integrators get permissive terms, hosters get viral terms. The compliance modules are MIT.</li>
+      <li><strong>Hands-on.</strong> Pilots are paired engineering, not deck-and-handoff. Operator engineers leave able to run the fleet without us.</li>
+      <li><strong>No NDAs to start.</strong> Public repositories, public RFCs, public mappings. Conversations get formal when a pilot agreement is signed.</li>
+      <li><strong>EU-based.</strong> Invoicing from the EU, VAT applicable, no Cloud Act exposure on any part of the trust chain.</li>
+    </ul>
+
+    <h2><span class="num">06</span>Why now</h2>
+    <p>
+      NIS2 is transposed in France (Loi Résilience, March 2025) with full compliance
+      required by end-2027. DORA has applied to financial entities since January 2025.
+      ANSSI BP-028 v2.0 is the reference for French infrastructure hardening. SecNumCloud
+      qualification and the EU Cyber Resilience Act are next on the horizon. These regimes
+      need declarative tooling that produces signed evidence as a side effect of operation —
+      not a separate compliance project layered on an imperative stack.
+    </p>
+
+    <h2><span class="num">07</span>Contact</h2>
+    <ul>
+      <li>Pilot enquiries: <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a></li>
+      <li>Security reports: <a href="mailto:security@arcanesys.fr">security@arcanesys.fr</a></li>
+    </ul>
+
+    <p class="text-center mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+      <a href={`/${lang}/services/`} class="font-mono text-xs tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
+        See what we deliver →
+      </a>
       <a href={`/${lang}/contact/`} class="font-mono text-xs tracking-[1.5px] uppercase text-indigo hover:text-indigo-hover no-underline">
         Open a conversation →
       </a>

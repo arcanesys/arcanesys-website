@@ -23,6 +23,7 @@ const { lang } = Astro.props;
     </div>
     <div>
       <div class="text-paper/75 mb-3">{t(lang, 'footer.program_heading')}</div>
+      <a href={`/${lang}/services/`} class="block py-1 text-paper/65 hover:text-paper/95 no-underline">{t(lang, 'nav.services')}</a>
       <a href={`/${lang}/pilot/`} class="block py-1 text-paper/65 hover:text-paper/95 no-underline">{t(lang, 'nav.pilot')}</a>
       <a href={`/${lang}/about/`} class="block py-1 text-paper/65 hover:text-paper/95 no-underline">{t(lang, 'nav.about')}</a>
       <a href={`/${lang}/contact/`} class="block py-1 text-paper/65 hover:text-paper/95 no-underline">{t(lang, 'nav.contact')}</a>
