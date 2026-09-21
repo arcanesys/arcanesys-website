@@ -8,7 +8,7 @@ const lang = 'en';
 const pathname = Astro.url.pathname;
 ---
 
-<Layout title="About - Arcanesys" lang={lang} description="Why we built this, why now, what this is not. Independent, EU-based, sovereignty-first by design. the founders.">
+<Layout title="About - Arcanesys" lang={lang} description="Why we built this, why now, what this is not. Independent, EU-based, sovereignty-first by design.">
   <PageHeader
     lang={lang}
     pathname={pathname}
@@ -51,17 +51,7 @@ const pathname = Astro.url.pathname;
       <li><strong>Not pretending to be 50 people.</strong> Founder plus ecosystem. The framework benefits from the broader NixOS community. Commercial work is delivered by a small core.</li>
     </ul>
 
-    <h2><span class="num">04</span>Founders</h2>
-    <ul>
-      <li><strong>the founders</strong> — pilots, partnerships, public-facing outreach.</li>
-      <li><strong>the founders</strong> — architecture, release engineering.</li>
-    </ul>
-    <p>
-      Pilot enquiries: <a href="mailto:contact@arcanesys.fr">contact@arcanesys.fr</a>.
-      Security reports: <a href="mailto:security@arcanesys.fr">security@arcanesys.fr</a>.
-    </p>
-
-    <h2><span class="num">05</span>Where to find the code</h2>
+    <h2><span class="num">04</span>Where to find the code</h2>
     <ul>
       <li><a href="https://github.com/arcanesys/nixfleet">arcanesys/nixfleet</a>: framework, agent, control plane, CLI, CI</li>
       <li><a href="https://github.com/arcanesys/nixfleet-compliance">arcanesys/nixfleet-compliance</a>: 16 controls + governance engine</li>
